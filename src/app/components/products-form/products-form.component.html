@@ -1,0 +1,116 @@
+<section class="m-5">
+  <div class="container rounded p-5" style="background-color: #a0a1a1">
+    <form [formGroup]="productForm" (ngSubmit)="addOrEditProduct($event)">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="exampleInputTitle"
+          aria-describedby="emailHelp"
+          placeholder="enter title"
+          formControlName="title"
+        />
+        <div
+          *ngIf="getTitle.touched || errorinForm"
+          id="titleHelp"
+          class="form-text text-danger"
+        >
+          <p *ngIf="getTitle.hasError('required')">Title is Required</p>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Quantity</label>
+        <input
+          type="text"
+          class="form-control"
+          id="exampleInputQuantity"
+          placeholder="enter Quantity"
+          formControlName="Quantity"
+        />
+      </div>
+      <div
+        *ngIf="getQuantity.touched || errorinForm"
+        id="QuantityHelp"
+        class="form-text text-danger"
+      >
+        <p *ngIf="getQuantity.hasError('required')">Quantity is Required</p>
+        <p *ngIf="getQuantity.hasError('pattern')">Quantity must be numbers</p>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPrice1" class="form-label">Price</label>
+        <input
+          type="text"
+          class="form-control"
+          id="exampleInputPrice2"
+          placeholder="enter  Price"
+          formControlName="price"
+        />
+      </div>
+      <div
+        *ngIf="getPrice.touched || errorinForm"
+        id="PriceHelp"
+        class="form-text text-danger"
+      >
+        <p *ngIf="getPrice.hasError('required')">Price is Required</p>
+        <p *ngIf="getPrice.hasError('pattern')">Price must be numbers</p>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputSrc1" class="form-label">imgScr</label>
+        <input
+          type="text"
+          class="form-control"
+          id="exampleInputSrc2"
+          placeholder="enter imgScr"
+          formControlName="imgScr"
+        />
+      </div>
+      <div
+        *ngIf="getImgScr.touched || errorinForm"
+        id="SrcHelp"
+        class="form-text text-danger"
+      >
+        <p *ngIf="getImgScr.hasError('required')">imgScr is Required</p>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputCategory1" class="form-label">Category</label>
+        <input
+          type="text"
+          class="form-control"
+          id="exampleInputCategory2"
+          placeholder="enter Category"
+          formControlName="category"
+        />
+      </div>
+      <div
+        *ngIf="getCategory.touched || errorinForm"
+        id="CategoryHelp"
+        class="form-text text-danger"
+      >
+        <p *ngIf="getCategory.hasError('required')">Category is Required</p>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputBrand1" class="form-label">Brand</label>
+        <input
+          type="text"
+          class="form-control"
+          id="exampleInputBrand2"
+          placeholder="enter Brand"
+          formControlName="brand"
+        />
+      </div>
+      <div
+        *ngIf="getBrand.touched || errorinForm"
+        id="BrandHelp"
+        class="form-text text-danger"
+      >
+        <p *ngIf="getBrand.hasError('required')">Brand is Required</p>
+        <p *ngIf="getBrand.hasError('pattern')">Brand must be numbers</p>
+      </div>
+
+      <button type="submit" class="btn btn-success mt-3">
+        {{ productId ? "Edit product" : "Add New product" }}
+      </button>
+    </form>
+  </div>
+</section>

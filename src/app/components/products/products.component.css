@@ -1,0 +1,29 @@
+
+ .addTOCart {
+    padding-top: 5px;
+    font-size: 2rem;
+    color: black;
+    transition : .5s ease;
+    position: relative;
+    
+}
+ .addTOCart:hover{
+    color: #0D6EFD;
+    
+  }
+   .addTOCart .buy{
+    
+    background-color: black;
+    color: rgb(189, 181, 181) ;
+    padding:4px 8px ;
+    border-radius: 50%;
+    font-size: 18px;
+    position: absolute;
+    top: -10px;
+    left:15px ;
+    transition: .5s ease;
+ }
+  .addTOCart:hover .buy{
+     background-color: #0D6EFD;
+ 
+  }

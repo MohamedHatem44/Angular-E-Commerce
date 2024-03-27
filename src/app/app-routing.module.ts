@@ -12,6 +12,8 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { CartComponent } from './components/cart/cart.component';
+import { OrderComponent } from './components/order/order.component';
+import { PaymentComponent } from './components/payment/payment.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -28,6 +30,11 @@ const routes: Routes = [
   { path: 'productsDashboard', component: ProductsDashboardComponent },
   { path: 'productsDetails/:id', component: ProductsDetailsComponent },
   { path: '**', component: NotFoundComponent },
+
+  //Order
+  { path: 'orders', component: OrderComponent },
+  { path: 'payment', component: PaymentComponent },
+  { path: '', redirectTo: '/orders', pathMatch: 'full' }
 ];
 
 @NgModule({

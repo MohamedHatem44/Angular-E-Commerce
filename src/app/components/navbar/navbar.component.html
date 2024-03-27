@@ -84,7 +84,7 @@
             >Register</a
           >
         </li>
-        <li *ngIf="isLogin" class="nav-item position-relative cart1">
+        <li *ngIf="isUser" class="nav-item position-relative cart1">
           <a class="nav-link position-relative" routerLink="cart">
             <i class="fas fa-cart-shopping fa-xl text-main"></i>
             <span
@@ -96,7 +96,7 @@
         <li *ngIf="isLogin" class="nav-item">
           <a (click)="logOut()" class="nav-link" id="logOutBtn">Logout</a>
         </li>
-        <li *ngIf="isLogin" class="nav-item">
+        <li *ngIf="isAdmin" class="nav-item">
           <a
             class="nav-link"
             routerLink="productsDashboard"

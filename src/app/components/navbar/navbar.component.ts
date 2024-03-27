@@ -33,6 +33,8 @@ export class NavbarComponent implements OnInit {
            }
         } else {
           this.isLogin = false;
+          this.isAdmin = false;
+          this.isUser=false;
         }
 
       },

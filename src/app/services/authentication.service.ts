@@ -22,6 +22,7 @@ export class AuthenticationService {
   decodeUserData() {
     let encodedToken = JSON.stringify(localStorage.getItem('userToken'));
     let decodedToken: any = jwtDecode(encodedToken);
+    console.log(decodedToken);
     this.userData.next(decodedToken);
   }
   /*-----------------------------------------------------------------*/

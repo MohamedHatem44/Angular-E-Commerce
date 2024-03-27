@@ -9,6 +9,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 export class NavbarComponent implements OnInit {
   isLogin: boolean = false;
   isAdmin: boolean = false;
+  isUser:boolean=false;
   cartNumber: number = 0;
   /*-----------------------------------------------------------------*/
 
@@ -23,9 +24,17 @@ export class NavbarComponent implements OnInit {
       next: () => {
         if (this._AuthenticationService.userData.getValue() !== null) {
           this.isLogin = true;
+          if(localStorage.getItem('role') =="admin" ){
+            this.isAdmin = true;
+            this.isUser=false;
+           }else{
+            this.isAdmin = false;
+            this.isUser=true;
+           }
         } else {
           this.isLogin = false;
         }
+
       },
     });
   }

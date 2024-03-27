@@ -39,11 +39,13 @@ export class LoginComponent {
             if (this.user.role === 'admin') {
               this.isLoading = false;
               localStorage.setItem('userToken', response.token);
+              localStorage.setItem('role', this.user.role);
               this._AuthenticationService.decodeUserData();
               this._Router.navigate(['/productsDashboard']);
             } else {
               this.isLoading = false;
               localStorage.setItem('userToken', response.token);
+              localStorage.setItem('role', this.user.role);
               this._AuthenticationService.decodeUserData();
               this._Router.navigate(['/home']);
             }

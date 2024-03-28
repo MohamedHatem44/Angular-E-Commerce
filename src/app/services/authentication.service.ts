@@ -22,7 +22,6 @@ export class AuthenticationService {
   decodeUserData() {
     let encodedToken = JSON.stringify(localStorage.getItem('userToken'));
     let decodedToken: any = jwtDecode(encodedToken);
-    console.log(decodedToken);
     this.userData.next(decodedToken);
   }
   /*-----------------------------------------------------------------*/
@@ -39,4 +38,23 @@ export class AuthenticationService {
   login(userData: object): Observable<any> {
     return this.httpClient.post(`${this.baseUrl}/login`, userData);
   }
+  /*-----------------------------------------------------------------*/
+  getToken() {
+    return localStorage.getItem('userToken');
+  }
+  /*-----------------------------------------------------------------*/
+  isLoggedIn() {
+    return !!this.getToken();
+  }
+  /*-----------------------------------------------------------------*/
+    getUserRole() {
+      return localStorage.getItem('role');
+    }
+  /*-----------------------------------------------------------------*/
+  getUserId() {
+    let encodedToken = JSON.stringify(localStorage.getItem('userToken'));
+    let decodedToken: any = jwtDecode(encodedToken);
+    return decodedToken.userId;
+  }
+/*-----------------------------------------------------------------*/
 }

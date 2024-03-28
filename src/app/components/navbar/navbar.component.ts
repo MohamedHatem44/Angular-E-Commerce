@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
-
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -22,9 +21,11 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this._AuthenticationService.userData.subscribe({
       next: () => {
+        console.log(this._AuthenticationService.userData.getValue());
+
         if (this._AuthenticationService.userData.getValue() !== null) {
           this.isLogin = true;
-          if(localStorage.getItem('role') =="admin" ){
+          if(this._AuthenticationService.getUserRole() =="admin" ){
             this.isAdmin = true;
             this.isUser=false;
            }else{

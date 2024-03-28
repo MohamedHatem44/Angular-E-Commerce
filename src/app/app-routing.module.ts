@@ -12,6 +12,7 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { CartComponent } from './components/cart/cart.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'products', component: ProductsComponent },
   { path: 'categories', component: CategoriesComponent },
   { path: 'brands', component: BrandsComponent },
+  { path: 'userprofile', component: UserProfileComponent },
   { path: 'cart', component: CartComponent },
   { path: 'usersDashboard', component: UsersComponent }, //edited remove it
   { path: 'users/login', component: LoginComponent }, //login

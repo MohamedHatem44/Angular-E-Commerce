@@ -1,8 +1,8 @@
-<nav class="navbar navbar-expand-xl navbar-light bg-light">
+<nav class="navbar navbar-expand-xl navbar-light bg-light ">
   <div class="container">
-    <a class="navbar-brand fs-2 fw-semibold" href="#">Tech Store</a>
+    <a class="navbar-brand fs-2 fw-semibold text-white" href="#">SoftTech</a>
     <button
-      class="navbar-toggler"
+      class="navbar-toggler bg-light"
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#collapsibleNavId"
@@ -11,10 +11,11 @@
       aria-label="Toggle navigation"
     >
       <span class="navbar-toggler-icon"></span>
-    </button>
+    </button><!-- burgur icon -->
 
-    <div class="collapse navbar-collapse" id="collapsibleNavId">
-      <ul class="navbar-nav me-auto mt-2 mt-lg-0 fs-5 fw-bold">
+
+    <div class="collapse navbar-collapse " id="collapsibleNavId">
+      <ul class="navbar-nav ms-auto justify-content-end fs-5 fw-bold">
         <li class="nav-item">
           <a
             class="nav-link fw-normal"
@@ -55,35 +56,45 @@
             >Brands</a
           >
         </li>
+        <li class="nav-item">
+          <a
+            class="nav-link fw-normal"
+            aria-current="page"
+            routerLink="userprofile"
+            routerLinkActive="fw-bold text-primary"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Profile</a
+          >
+        </li>
       </ul>
       <!------------------------------------------------------------------------------------------------------>
       <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-        <li class="nav-item d-flex align-items-center socialMedia">
+        <!-- <li class="nav-item d-flex align-items-center socialMedia">
           <i class="fab mx-2 fa-instagram cursor-pointer"></i>
           <i class="fab mx-2 fa-facebook cursor-pointer"></i>
           <i class="fab mx-2 fa-tiktok cursor-pointer"></i>
           <i class="fab mx-2 fa-twitter cursor-pointer"></i>
           <i class="fab mx-2 fa-linkedin cursor-pointer"></i>
           <i class="fab mx-2 fa-youtube cursor-pointer"></i>
-        </li>
+        </li> -->
         <li *ngIf="!isLogin" class="nav-item">
-          <a
-            class="nav-link fw-normal"
+          <button
+            class="btn btn-primary me-2"
             routerLink="users/login"
-            routerLinkActive="fw-bold text-primary"
+            routerLinkActive="fw-bold"
             [routerLinkActiveOptions]="{ exact: true }"
-            >Login</a
-          >
+          >Login</button>
         </li>
+        <br>
         <li *ngIf="!isLogin" class="nav-item">
-          <a
-            class="nav-link fw-normal"
+          <button
+            class="btn btn-light text-primary"
             routerLink="users/register"
-            routerLinkActive="fw-bold text-primary"
+            routerLinkActive="fw-bold"
             [routerLinkActiveOptions]="{ exact: true }"
-            >Register</a
-          >
+          >Register</button>
         </li>
+
         <li *ngIf="isUser" class="nav-item position-relative cart1">
           <a class="nav-link position-relative" routerLink="cart">
             <i class="fas fa-cart-shopping fa-xl text-main"></i>

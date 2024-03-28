@@ -20,6 +20,8 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { CartComponent } from './components/cart/cart.component';
+import { SliderComponent } from './components/slider/slider.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { CartComponent } from './components/cart/cart.component';
     RegisterComponent,
     LoginComponent,
     CartComponent,
+    SliderComponent,
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,

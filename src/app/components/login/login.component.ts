@@ -46,6 +46,7 @@ export class LoginComponent {
               this.isLoading = false;
               localStorage.setItem('userToken', response.token);
               localStorage.setItem('role', this.user.role);
+              localStorage.setItem('currentid', this.user._id);
               this._AuthenticationService.decodeUserData();
               this._Router.navigate(['/home']);
             }

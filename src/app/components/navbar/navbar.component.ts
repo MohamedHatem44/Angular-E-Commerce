@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,34 +10,46 @@ import { AuthenticationService } from '../../services/authentication.service';
 export class NavbarComponent implements OnInit {
   isLogin: boolean = false;
   isAdmin: boolean = false;
-  isUser:boolean=false;
+  isUser: boolean = false;
   cartNumber: number = 0;
+  currentId: any = '';
+  isLoading: boolean = false;
+  user: any;
   /*-----------------------------------------------------------------*/
 
-  constructor(private _AuthenticationService: AuthenticationService) {}
+  constructor(
+    private _AuthenticationService: AuthenticationService,
+    private _UserService: UserService
+  ) {}
   /*-----------------------------------------------------------------*/
   logOut() {
     this._AuthenticationService.logOut();
   }
   /*-----------------------------------------------------------------*/
   ngOnInit(): void {
+    this.currentId = localStorage.getItem('currentid');
+    this._UserService.getUserById(this.currentId).subscribe({
+      next: (response) => {
+        console.log(response.data);
+        this.user = response.data;
+      },
+    });
     this._AuthenticationService.userData.subscribe({
       next: () => {
         if (this._AuthenticationService.userData.getValue() !== null) {
           this.isLogin = true;
-          if(localStorage.getItem('role') =="admin" ){
+          if (localStorage.getItem('role') == 'admin') {
             this.isAdmin = true;
-            this.isUser=false;
-           }else{
+            this.isUser = false;
+          } else {
             this.isAdmin = false;
-            this.isUser=true;
-           }
+            this.isUser = true;
+          }
         } else {
           this.isLogin = false;
           this.isAdmin = false;
-          this.isUser=false;
+          this.isUser = false;
         }
-
       },
     });
   }

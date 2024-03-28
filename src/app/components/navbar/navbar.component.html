@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-xl navbar-light bg-light ">
+<nav class="navbar navbar-expand-xl navbar-light bg-light">
   <div class="container">
     <a class="navbar-brand fs-2 fw-semibold text-white" href="#">SoftTech</a>
     <button
@@ -10,11 +10,10 @@
       aria-expanded="false"
       aria-label="Toggle navigation"
     >
-      <span class="navbar-toggler-icon"></span>
-    </button><!-- burgur icon -->
+      <span class="navbar-toggler-icon"></span></button
+    ><!-- burgur icon -->
 
-
-    <div class="collapse navbar-collapse " id="collapsibleNavId">
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
       <ul class="navbar-nav ms-auto justify-content-end fs-5 fw-bold">
         <li class="nav-item">
           <a
@@ -60,7 +59,7 @@
           <a
             class="nav-link fw-normal"
             aria-current="page"
-            routerLink="userprofile"
+            [routerLink]="['/userprofile']"
             routerLinkActive="fw-bold text-primary"
             [routerLinkActiveOptions]="{ exact: true }"
             >Profile</a
@@ -83,16 +82,20 @@
             routerLink="users/login"
             routerLinkActive="fw-bold"
             [routerLinkActiveOptions]="{ exact: true }"
-          >Login</button>
+          >
+            Login
+          </button>
         </li>
-        <br>
+        <br />
         <li *ngIf="!isLogin" class="nav-item">
           <button
             class="btn btn-light text-primary"
             routerLink="users/register"
             routerLinkActive="fw-bold"
             [routerLinkActiveOptions]="{ exact: true }"
-          >Register</button>
+          >
+            Register
+          </button>
         </li>
 
         <li *ngIf="isUser" class="nav-item position-relative cart1">

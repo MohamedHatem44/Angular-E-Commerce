@@ -1,4 +1,4 @@
-<div class="container-xl px-4 mt-4">
+<div class="container-xl px-4 my-5">
   <hr class="mt-0 mb-4" />
   <div class="row">
     <div class="col-xl-4">
@@ -55,6 +55,7 @@
                 placeholder="Enter your email address"
                 value="name@example.com"
                 [value]="currentuser?.email"
+                disabled
               />
             </div>
             <!-- Form Row-->
@@ -66,7 +67,7 @@
                 id="inputPhone"
                 type="tel"
                 placeholder="Enter your phone number"
-                [value]="currentuser?.phone"
+                [value]="currentuser?.phone || 'No Phone Number'"
               />
             </div>
             <!-- Save changes button-->

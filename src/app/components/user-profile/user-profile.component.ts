@@ -18,8 +18,8 @@ export class UserProfileComponent implements OnInit {
     this.currentId = localStorage.getItem('currentid');
     this._UserService.getUserById(this.currentId).subscribe({
       next: (response) => {
-        console.log(response.data);
         this.currentuser = response.data;
+        console.log(this.currentuser);
       },
     });
     this._UserService.getAllUsers().subscribe({

@@ -9,8 +9,11 @@
           <!-- Profile picture image-->
           <img
             class="img-account-profile rounded-circle mb-2"
-            src="http://bootdey.com/img/Content/avatar/avatar1.png"
-            alt=""
+            [src]="
+              currentuser?.image ||
+              'http://bootdey.com/img/Content/avatar/avatar1.png'
+            "
+            alt="User's Profile Picture"
           />
           <!-- Profile picture help block-->
           <div class="small font-italic text-muted mb-4">
@@ -28,7 +31,7 @@
       <div class="card mb-4">
         <div class="card-header">Account Details</div>
         <div class="card-body">
-          <form>
+          <form #myForm="ngForm">
             <!-- Form Group (username)-->
             <div class="mb-3">
               <label class="small mb-1" for="inputUsername">User Name</label>
@@ -37,7 +40,7 @@
                 id="inputUsername"
                 type="text"
                 placeholder="Enter your username"
-                [value]="currentuser.name"
+                [value]="currentuser?.name"
               />
             </div>
             <!-- Form Group (email address)-->
@@ -51,30 +54,29 @@
                 type="email"
                 placeholder="Enter your email address"
                 value="name@example.com"
-                [value]="currentuser.email"
+                [value]="currentuser?.email"
               />
             </div>
             <!-- Form Row-->
             <div class="row gx-3 mb-3">
               <!-- Form Group (phone number)-->
-              <div class="col-md-6">
-                <label class="small mb-1" for="inputPhone">Phone number</label>
-                <input
-                  class="form-control"
-                  id="inputPhone"
-                  type="tel"
-                  placeholder="Enter your phone number"
-                  [value]="currentuser.phone"
-                />
-              </div>
-              <!-- Form Group (birthday)-->
-              <!-- <div class="col-md-6">
-                              <label class="small mb-1" for="inputBirthday">Birthday</label>
-                              <input class="form-control" id="inputBirthday" type="text" name="birthday" placeholder="Enter your birthday" value="06/10/1988">
-                          </div> -->
+              <label class="small mb-1" for="inputPhone">Phone number</label>
+              <input
+                class="form-control"
+                id="inputPhone"
+                type="tel"
+                placeholder="Enter your phone number"
+                [value]="currentuser?.phone"
+              />
             </div>
             <!-- Save changes button-->
-            <button class="btn btn-primary" type="button">Save changes</button>
+            <button
+              class="btn btn-primary"
+              type="button"
+              [disabled]="!myForm.touched"
+            >
+              Save changes
+            </button>
           </form>
         </div>
       </div>

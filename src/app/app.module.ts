@@ -22,6 +22,8 @@ import { LoginComponent } from './components/login/login.component';
 import { CartComponent } from './components/cart/cart.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SliderComponent } from './components/slider/slider.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     RegisterComponent,
     LoginComponent,
     CartComponent,
+    SliderComponent,
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,

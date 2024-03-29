@@ -21,8 +21,6 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this._AuthenticationService.userData.subscribe({
       next: () => {
-        console.log(this._AuthenticationService.userData.getValue());
-
         if (this._AuthenticationService.userData.getValue() !== null) {
           this.isLogin = true;
           if(this._AuthenticationService.getUserRole() =="admin" ){

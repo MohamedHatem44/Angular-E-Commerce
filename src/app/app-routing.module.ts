@@ -25,9 +25,9 @@ const routes: Routes = [
   { path: 'brands', component: BrandsComponent },
   { path: 'cart', component: CartComponent ,canActivate: [AuthGuardService], },
   { path: 'usersDashboard', component: UsersComponent ,canActivate: [AuthGuardService,AdminGuardService],}, //edited remove it
-  { path: 'userprofile', component: UserProfileComponent },
+  { path: 'userprofile', component: UserProfileComponent,canActivate: [AuthGuardService] },
   { path: 'cart', component: CartComponent },
-  { path: 'usersDashboard', component: UsersComponent }, //edited remove it
+  { path: 'usersDashboard', component: UsersComponent,canActivate: [AuthGuardService,AdminGuardService] }, //edited remove it
   { path: 'users/login', component: LoginComponent }, //login
   { path: 'users/register', component: RegisterComponent }, //register
   { path: 'addProduct', component: ProductsFormComponent ,canActivate: [AuthGuardService,AdminGuardService],},

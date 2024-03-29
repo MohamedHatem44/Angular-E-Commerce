@@ -10,13 +10,22 @@ export class OrderService {
 
   constructor(private http: HttpClient) { }
 
-  getOrders(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+  getAllOrders(): Observable<any> {
+    return this.http.get(this.apiUrl);
   }
 
   createOrder(orderData: any): Observable<any> {
     return this.http.post<any>(this.apiUrl, orderData);
   }
 
-  // Implement updateOrder, deleteOrder, etc.
+  updateOrder(orderId: string, updatedOrderData: any): Observable<any> {
+    const url = `${this.apiUrl}/${orderId}`;
+    return this.http.patch<any>(url, updatedOrderData);
+  }
+
+  cancelOrder(orderId: string): Observable<any> {
+    const url = `${this.apiUrl}/${orderId}`;
+    return this.http.delete<any>(url);
+  }  
+
 }

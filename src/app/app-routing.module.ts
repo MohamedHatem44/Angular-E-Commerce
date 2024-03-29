@@ -29,12 +29,12 @@ const routes: Routes = [
   { path: 'products/:id', component: ProductsFormComponent },
   { path: 'productsDashboard', component: ProductsDashboardComponent },
   { path: 'productsDetails/:id', component: ProductsDetailsComponent },
-  { path: '**', component: NotFoundComponent },
-
+  
   //Order
-  { path: 'orders', component: OrderComponent },
+  { path: 'Orders', component: OrderComponent },
   { path: 'payment', component: PaymentComponent },
-  { path: '', redirectTo: '/orders', pathMatch: 'full' }
+  // { path: '', redirectTo: '/orders', pathMatch: 'full' },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({

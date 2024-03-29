@@ -22,6 +22,8 @@ import { LoginComponent } from './components/login/login.component';
 import { CartComponent } from './components/cart/cart.component';
 import { OrderComponent } from './components/order/order.component';
 import { PaymentComponent } from './components/payment/payment.component';
+import { OrderService } from './services/order.service';
+import { PaymentService } from './services/payment.service';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,7 @@ import { PaymentComponent } from './components/payment/payment.component';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [UserService],
+  providers: [UserService, OrderService, PaymentService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

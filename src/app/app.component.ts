@@ -14,10 +14,7 @@ export class AppComponent {
     const currentRoute = this.router.url;
 
     // Check if the current route is the login or register route
-    return (
-      currentRoute.includes('users/login') ||
-      currentRoute.includes('users/register')
-    );
+    return currentRoute.includes('users/login') || currentRoute.includes('users/register') || currentRoute.includes('adminPanel');
   }
   /*-----------------------------------------------------------------*/
 }

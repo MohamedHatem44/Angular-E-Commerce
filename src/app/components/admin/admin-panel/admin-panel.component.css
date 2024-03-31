@@ -1,0 +1,17 @@
+.admin-wrapper {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.admin-main {
+  width: calc(100%-175px);
+  margin-left: 175px;
+}
+
+app-admin-sidebar {
+  /* position: fixed; */
+  width: 175px;
+  background-color: aquamarine;
+  height: 100%;
+}

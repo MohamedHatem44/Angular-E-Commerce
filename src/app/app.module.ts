@@ -24,6 +24,14 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SliderComponent } from './components/slider/slider.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { AdminSidebarComponent } from './components/admin/admin-sidebar/admin-sidebar.component';
+import { AdminPanelComponent } from './components/admin/admin-panel/admin-panel.component';
+import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard.component';
+import { AdminProductsDashboardComponent } from './components/admin/admin-products-dashboard/admin-products-dashboard.component';
+import { AdminCategoriesDashboardComponent } from './components/admin/admin-categories-dashboard/admin-categories-dashboard.component';
+import { AdminBrandsDashboardComponent } from './components/admin/admin-brands-dashboard/admin-brands-dashboard.component';
+import { AdminUsersDashboardComponent } from './components/admin/admin-users-dashboard/admin-users-dashboard.component';
+import { AdminOrdersDashboardComponent } from './components/admin/admin-orders-dashboard/admin-orders-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -44,15 +52,18 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     CartComponent,
     SliderComponent,
     UserProfileComponent,
+    AdminSidebarComponent,
+    AdminPanelComponent,
+    AdminDashboardComponent,
+    AdminProductsDashboardComponent,
+    AdminCategoriesDashboardComponent,
+    AdminBrandsDashboardComponent,
+    AdminUsersDashboardComponent,
+    AdminOrdersDashboardComponent,
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-  ],
-  providers: [UserService,
+  imports: [BrowserModule, FormsModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule],
+  providers: [
+    UserService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

@@ -13,7 +13,6 @@ import { UserService } from './services/user.service';
 import { FooterComponent } from './components/footer/footer.component';
 import { ProductsComponent } from './components/products/products.component';
 import { ProductsFormComponent } from './components/products-form/products-form.component';
-import { ProductsDashboardComponent } from './components/products-dashboard/products-dashboard.component';
 import { ProductsDetailsComponent } from './components/products-details/products-details.component';
 import { BrandsComponent } from './components/brands/brands.component';
 import { CategoriesComponent } from './components/categories/categories.component';
@@ -43,7 +42,6 @@ import { AdminOrdersDashboardComponent } from './components/admin/admin-orders-d
     FooterComponent,
     ProductsComponent,
     ProductsFormComponent,
-    ProductsDashboardComponent,
     ProductsDetailsComponent,
     BrandsComponent,
     CategoriesComponent,

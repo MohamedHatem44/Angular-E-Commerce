@@ -8,11 +8,7 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./products-details.component.css'],
 })
 export class ProductsDetailsComponent implements OnInit {
-  constructor(
-    private productsService: ProductService,
-    private activatedRoute: ActivatedRoute,
-    private _CartService: CartService
-  ) {}
+  constructor(private productsService: ProductService, private activatedRoute: ActivatedRoute, private _CartService: CartService) {}
 
   productId: any;
   product: any;
@@ -34,7 +30,12 @@ export class ProductsDetailsComponent implements OnInit {
       },
     });
   }
-
+  /*-----------------------------------------------------------------*/
+  getUserRole(): string | null {
+    // Retrieve user role from local storage
+    return localStorage.getItem('role');
+  }
+  /*-----------------------------------------------------------------*/
   addToCart(productId: string) {
     // this.isLoading = true;
     // this._CartService.addToCart(productId).subscribe({

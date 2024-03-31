@@ -9,10 +9,7 @@ import { CartService } from '../../services/cart.service';
   styleUrls: ['./products.component.css'],
 })
 export class ProductsComponent implements OnInit {
-  constructor(
-    private productsService: ProductService,
-    private cartService: CartService
-  ) {}
+  constructor(private productsService: ProductService, private cartService: CartService) {}
 
   isSpin: boolean = false;
   products: any[] = [];
@@ -29,7 +26,12 @@ export class ProductsComponent implements OnInit {
       },
     });
   }
-
+  /*-----------------------------------------------------------------*/
+  getUserRole(): string | null {
+    // Retrieve user role from local storage
+    return localStorage.getItem('role');
+  }
+  /*-----------------------------------------------------------------*/
   addToCart(productId: string) {
     // this.isLoading = true;
     // this.cartService.addToCart(productId).subscribe({

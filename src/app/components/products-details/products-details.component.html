@@ -20,16 +20,10 @@
       <p>Price : {{ product?.price | currency }}</p>
       <p>Quantity : {{ product?.quantity }}</p>
       <div>
-        <span class="text-muted fw-bold font-sm"
-          >Average ratings : <i class="fas fa-star rating-color"></i>
-          {{ product.ratingsAverage }}</span
-        >
+        <span class="text-muted fw-bold font-sm">Average ratings : <i class="fas fa-star rating-color"></i> {{ product.ratingsAverage }}</span>
       </div>
 
-      <button
-        (click)="addToCart(product._id)"
-        class="btn btn-success w-100 my-2"
-      >
+      <button *ngIf="getUserRole() !== 'admin'" (click)="addToCart(product._id)" class="btn btn-success w-100 my-2">
         <i *ngIf="isLoading" class="fas fa-spinner fa-spin"></i>
         <span>+ Add</span>
       </button>

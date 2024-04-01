@@ -14,16 +14,26 @@ export class OrderService {
     return this.http.get(this.apiUrl);
   }
 
-  createOrder(orderData: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, orderData);
+  // createOrder(orderData: any): Observable<any> {
+  //   return this.http.post<any>(this.apiUrl, orderData);
+  // }
+
+  createOrder(orderData: any) {
+    const url = this.apiUrl;
+    const modelOrderData = {
+      user: orderData.userId,
+      products: orderData.cartItems.map((item: { productId: any; quantity: any; }) => ({
+        product: item.productId,
+        quantity: item.quantity
+      })),
+      totalPrice: orderData.totalPrice,
+      status: 'placed' 
+    };
+
+    return this.http.post(url, modelOrderData);
   }
 
-  updateOrder(orderId: string, updatedOrderData: any): Observable<any> {
-    const url = `${this.apiUrl}/${orderId}`;
-    return this.http.patch<any>(url, updatedOrderData);
-  }
-
-  cancelOrder(orderId: string): Observable<any> {
+  deleteOrder(orderId: string): Observable<any> {
     const url = `${this.apiUrl}/${orderId}`;
     return this.http.delete<any>(url);
   }  

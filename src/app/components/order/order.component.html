@@ -22,10 +22,8 @@
             </div>
           </li>
         </ul>
-        <!-- Add buttons to update and cancel orders -->
         <div class="mt-2">
-          <button class="btn btn-primary me-2" (click)="updateOrder(order.id, null)">Update</button>
-          <button class="btn btn-danger" (click)="cancelOrder(order.id)">Cancel</button>
+          <button class="btn btn-danger" (click)="cancelOrder(order._id)">Cancel Order</button>
         </div>
       </div>
     </div>

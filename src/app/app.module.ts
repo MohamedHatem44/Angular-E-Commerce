@@ -24,6 +24,14 @@ import { OrderComponent } from './components/order/order.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { OrderService } from './services/order.service';
 import { PaymentService } from './services/payment.service';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SliderComponent } from './components/slider/slider.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -44,6 +52,9 @@ import { PaymentService } from './services/payment.service';
     CartComponent,
     OrderComponent,
     PaymentComponent,
+    SliderComponent,
+    UserProfileComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,8 +62,17 @@ import { PaymentService } from './services/payment.service';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NoopAnimationsModule,
+    MatButtonModule,
+    MatDialogModule,
   ],
-  providers: [UserService, OrderService, PaymentService],
+  providers: [UserService, OrderService, PaymentService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

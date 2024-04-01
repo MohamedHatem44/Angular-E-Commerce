@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../../services/order.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-order',
@@ -9,8 +12,12 @@ import { OrderService } from '../../services/order.service';
 export class OrderComponent implements OnInit {
   orders: any[] = [];
   loading: boolean = false;
+  cartItems: any[] = [];
+  totalPrice: number = 0;
 
-  constructor(private orderService: OrderService) { }
+  constructor(private orderService: OrderService,
+    private authService: AuthenticationService,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.loading = true;
@@ -29,38 +36,54 @@ export class OrderComponent implements OnInit {
     });
   }
 
-  updateOrder(orderId: string, updatedOrderData: any) {
-    this.loading = true;
-    this.orderService.updateOrder(orderId, updatedOrderData).subscribe({
-      next: (response) => {
-        // Update the local orders array with the modified order
-        const updatedOrderIndex = this.orders.findIndex((order) => order.id === orderId);
-        this.orders[updatedOrderIndex] = response.data;
-  
-        this.loading = false;
-      },
-      error: (err) => {
-        this.loading = false;
-        console.error(err);
-      }
-    });
-  }
-  
-
   cancelOrder(orderId: string) {
-    this.loading = true;
-    this.orderService.cancelOrder(orderId).subscribe({
-      next: (response) => {
-        // Remove the cancelled order from the local orders array
-        this.orders = this.orders.filter((order) => order.id !== orderId);
-  
-        this.loading = false;
-      },
-      error: (err) => {
-        this.loading = false;
-        console.error(err);
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        message: 'Are you sure you want to cancel this order?',
+        proceed: () => {
+          this.orderService.deleteOrder(orderId).subscribe({
+            next: () => {
+              this.orders = this.orders.filter((order) => order.id !== orderId);
+              this.loading = false;
+              this.fetchOrders(); // Refresh the orders list
+            },
+            error: (err) => {
+              this.loading = false;
+              // Display an error message to the user
+              console.error(err);
+            }
+          });
+        }
       }
     });
   }
-  
+
+  calculateOrderAge(orderDate: Date): number {
+    const currentDate = new Date();
+    const diffInMs = Math.abs(currentDate.getTime() - orderDate.getTime());
+    // Convert milliseconds to days and round down to whole days
+    return Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+  }
+
+  createOrder() {
+    // Prepare order data (userId, cartItems, totalPrice)
+    const orderData = {
+      userId: this.authService.getUserId(),
+      cartItems: this.cartItems,
+      totalPrice: this.totalPrice,
+    };
+
+    this.orderService.createOrder(orderData)
+      .subscribe({
+        next: (response) => {
+          console.log("Order created successfully:", response);
+          // Clear cart (optional)
+          this.cartItems = [];
+        },
+        error: (err) => {
+          console.error("Error creating order:", err);
+        }
+      });
+  }
+
 }

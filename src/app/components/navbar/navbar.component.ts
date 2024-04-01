@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 
 import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -18,13 +19,14 @@ export class NavbarComponent implements OnInit {
   user: any;
   /*-----------------------------------------------------------------*/
 
-  constructor(
-    private _AuthenticationService: AuthenticationService,
-    private _UserService: UserService
-  ) {}
+  constructor(private _AuthenticationService: AuthenticationService, private _UserService: UserService, private router: Router) {}
   /*-----------------------------------------------------------------*/
   logOut() {
     this._AuthenticationService.logOut();
+  }
+  /*-----------------------------------------------------------------*/
+  isActiveRoute(route: string) {
+    return this.router.url.includes(route);
   }
   /*-----------------------------------------------------------------*/
   ngOnInit(): void {
@@ -41,8 +43,7 @@ export class NavbarComponent implements OnInit {
 
         if (this._AuthenticationService.userData.getValue() !== null) {
           this.isLogin = true;
-          if(this._AuthenticationService.getUserRole() =="admin" ){
-
+          if (this._AuthenticationService.getUserRole() == 'admin') {
             this.isAdmin = true;
             this.isUser = false;
           } else {

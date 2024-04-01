@@ -30,6 +30,7 @@ import { AdminBrandsDashboardComponent } from './components/admin/admin-brands-d
 import { AdminUsersDashboardComponent } from './components/admin/admin-users-dashboard/admin-users-dashboard.component';
 import { AdminOrdersDashboardComponent } from './components/admin/admin-orders-dashboard/admin-orders-dashboard.component';
 import { AdminAddProductComponent } from './components/admin/admin-add-product/admin-add-product.component';
+import { AdminAddCategoryComponent } from './components/admin/admin-add-category/admin-add-category.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { AdminAddProductComponent } from './components/admin/admin-add-product/a
     AdminUsersDashboardComponent,
     AdminOrdersDashboardComponent,
     AdminAddProductComponent,
+    AdminAddCategoryComponent,
   ],
   imports: [BrowserModule, FormsModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule],
   providers: [

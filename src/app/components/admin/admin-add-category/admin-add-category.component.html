@@ -14,15 +14,18 @@
           <span *ngIf="addCategoryForm.get('name')?.errors?.['maxlength']" class="text-danger"> Max length is 15</span>
         </div>
       </div>
+      <!-- formControlName="image"  -->
       <hr />
       <div class="mb-2">
         <label for="categoryImage" class="form-label">Category Image</label>
         <br />
-        <input type="file" class="form-control-file" id="categoryImage" formControlName="image" name="categoryImage" accept="image/*" required />
+        <input type="file" class="form-control-file" id="categoryImage" name="categoryImage" accept="image/*" (change)="onImageUpload($event)" required />
+        <div>
+          <img [src]="imageDisplay" alt="" />
+        </div>
         <br />
         <div class="mb-5 col-sm-12 errors" *ngIf="addCategoryForm.get('image')?.errors && addCategoryForm.get('image')?.dirty">
           <span *ngIf="addCategoryForm.get('image')?.errors?.['required']" class="text-danger">Please select an image.</span>
-          <!-- <span *ngIf="addCategoryForm.get('image')?.errors?.['imageExtensionValidator']" class="text-danger">Invalid image format, only image files allowed.</span> -->
         </div>
         <hr />
       </div>

@@ -23,7 +23,7 @@ export class CategoryService {
   }
   /*-----------------------------------------------------------------*/
   // Create Category
-  createCategory(category: Category): Observable<Category> {
+  createCategory(category: FormData): Observable<Category> {
     return this.httpClient.post<Category>(this.baseUrl, category);
   }
   /*-----------------------------------------------------------------*/

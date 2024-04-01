@@ -10,7 +10,6 @@ import { CategoryService } from 'src/app/services/category.service';
 /*-----------------------------------------------------------------*/
 export class AdminCategoriesDashboardComponent implements OnInit {
   categories: Category[] = [];
-  newCategory: Category = { name: '', image: '' };
   specificCatrgory: Category = {};
   /*-----------------------------------------------------------------*/
   // Ctor
@@ -20,23 +19,11 @@ export class AdminCategoriesDashboardComponent implements OnInit {
     // Get list of Categories
     this._CategoryService.getAllcategories().subscribe(
       (response: any) => {
+        console.log(response.data);
         this.categories = response.data;
       },
       (error: any) => {
         console.error('Error fetching categories:', error);
-      }
-    );
-  }
-  /*-----------------------------------------------------------------*/
-  // Create Category
-  createCategory(): void {
-    this._CategoryService.createCategory(this.newCategory).subscribe(
-      (response: any) => {
-        this.categories.push(response.data);
-        this.newCategory = { name: '' };
-      },
-      (error: any) => {
-        console.error('Error creating category:', error);
       }
     );
   }

@@ -10,10 +10,8 @@ import { CategoryService } from 'src/app/services/category.service';
 })
 export class AdminAddCategoryComponent implements OnInit {
   categories: Category[] = [];
+  imageDisplay!: string | ArrayBuffer;
   backendErrors: boolean = false;
-  // newCategory: any = { name: '', image: null };
-
-  // addCategoryForm: FormGroup;
   /*-----------------------------------------------------------------*/
   // Ctor
   constructor(private _CategoryService: CategoryService) {}
@@ -32,33 +30,33 @@ export class AdminAddCategoryComponent implements OnInit {
   /*-----------------------------------------------------------------*/
   addCategoryForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15), Validators.pattern('^[a-zA-Z]*$')]),
-    image: new FormControl('', [Validators.required]),
+    // image: new FormControl('', [Validators.required]),
+    image: new FormControl<File | null>(null, [Validators.required]),
   });
   /*-----------------------------------------------------------------*/
-  // Create Category
-  // createCategory(): void {
-  //   this._CategoryService.createCategory(this.newCategory).subscribe(
-  //     (response: any) => {
-  //       this.categories.push(response.data);
-  //       this.newCategory = { name: '', image: null };
-  //     },
-  //     (error: any) => {
-  //       console.error('Error creating category:', error);
-  //     }
-  //   );
-  // }
+  onImageUpload(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.addCategoryForm.patchValue({ image: file });
+      this.addCategoryForm.get('image')?.updateValueAndValidity();
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imageDisplay = reader.result as string | ArrayBuffer;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
   /*-----------------------------------------------------------------*/
   createCategoryBtn() {
     if (this.addCategoryForm.invalid) {
       return;
     }
 
-    const newCategory: any = {
-      name: this.addCategoryForm.controls['name'].value,
-      image: this.addCategoryForm.controls['image'].value,
-    };
+    const newCategoryFormData = new FormData();
+    newCategoryFormData.append('name', this.addCategoryForm.controls['name'].value!);
+    newCategoryFormData.append('image', this.addCategoryForm.controls['image'].value!);
 
-    this._CategoryService.createCategory(newCategory).subscribe(
+    this._CategoryService.createCategory(newCategoryFormData).subscribe(
       (response: any) => {
         alert('Category created successfully.');
         this.addCategoryForm.reset();

@@ -11,8 +11,10 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private authService: AuthenticationService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
+    console.log(this.authService.isLoggedIn());
     if (this.authService.isLoggedIn()) {
       const token = this.authService.getToken();
+      console.log("token")
       const newReq = req.clone({
         headers: req.headers.append('Authorization', 'Bearer ' + token),
       });
@@ -20,7 +22,6 @@ export class AuthInterceptor implements HttpInterceptor {
     }else{
       return next.handle(req);
     }
-
   }
 }
 

@@ -1,0 +1,39 @@
+<div class="card mb-4">
+  <div class="card-body">
+    <h5 class="card-title">Categories</h5>
+    <p class="card-text">List of All Categories</p>
+    <a type="button" class="btn btn-success" routerLink="/adminPanel/addCategory"> + Add</a>
+  </div>
+</div>
+<!----------------------------------------------------------------------------------------------->
+<!-- Categories Table -->
+<table class="table bg-light border border-1 border-black">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Image</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let category of categories; let i = index">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ category._id }}</td>
+      <td>{{ category.name }}</td>
+      <td><img [src]="category.image" alt="Category Image" width="150" height="150" /></td>
+      <td>
+        <!-- <a class="btn btn-outline-warning mt-2" [routerLink]="['/products', product._id]">Edit</a> -->
+      </td>
+      <td>
+        <button type="button" class="btn btn-danger" (click)="deleteCategory(category._id)">Delete</button>
+      </td>
+      <td>
+        <!-- <button class="btn btn-outline-primary mt-2" [routerLink]="['/productsDetails', product._id]">Show</button> -->
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -10,10 +10,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   user: any;
-  constructor(
-    private _AuthenticationService: AuthenticationService,
-    private _Router: Router
-  ) {
+  constructor(private _AuthenticationService: AuthenticationService, private _Router: Router) {
     // if (localStorage.getItem('userToken') !== null) {
     //   _Router.navigate(['/home']);
     // }
@@ -23,10 +20,7 @@ export class LoginComponent {
   apiError: string = '';
   loginForm: FormGroup = new FormGroup({
     email: new FormControl(null, [Validators.required, Validators.email]),
-    password: new FormControl(null, [
-      Validators.required,
-      Validators.pattern(/^[A-Z][a-z0-9]{5,10}$/),
-    ]),
+    password: new FormControl(null, [Validators.required, Validators.pattern(/^[A-Z][a-z0-9]{5,10}$/)]),
   });
 
   loginUser(loginForm: FormGroup) {
@@ -41,7 +35,8 @@ export class LoginComponent {
               localStorage.setItem('userToken', response.token);
               localStorage.setItem('role', this.user.role);
               this._AuthenticationService.decodeUserData();
-              this._Router.navigate(['/productsDashboard']);
+              localStorage.setItem('currentid', this.user._id);
+              this._Router.navigate(['/adminPanel']);
             } else {
               this.isLoading = false;
               localStorage.setItem('userToken', response.token);
@@ -57,8 +52,7 @@ export class LoginComponent {
           if (err.status === 401) {
             this.apiError = 'Incorrect email or password. Please try again.';
           } else {
-            this.apiError =
-              'An error occurred while logging in. Please try again later.';
+            this.apiError = 'An error occurred while logging in. Please try again later.';
           }
         },
       });

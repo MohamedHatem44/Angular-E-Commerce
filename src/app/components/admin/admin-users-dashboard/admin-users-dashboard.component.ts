@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css'],
+  selector: 'app-admin-users-dashboard',
+  templateUrl: './admin-users-dashboard.component.html',
+  styleUrls: ['./admin-users-dashboard.component.css'],
 })
-export class UsersComponent implements OnInit {
+export class AdminUsersDashboardComponent implements OnInit {
   users: any[] = [];
   constructor(private userService: UserService) {}
 

@@ -17,7 +17,7 @@ export class CategoryService {
   }
   /*-----------------------------------------------------------------*/
   // Get specific Category by id
-  getCategoryById(categoryId: number): Observable<any> {
+  getCategoryById(categoryId: any): Observable<any> {
     return this.httpClient.get(`${this.baseUrl}/${categoryId}`);
   }
   /*-----------------------------------------------------------------*/

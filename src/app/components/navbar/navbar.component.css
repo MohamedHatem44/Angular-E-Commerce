@@ -8,7 +8,7 @@ a {
 a:hover {
   color: #004ab9;
 }
-#dash{
+#dash {
   color: rgb(239, 67, 204);
 }
 @media (max-width: 1399.98px) {
@@ -80,9 +80,7 @@ a:hover {
   font-size: medium;
 }
 
-
-.navbar{
-background-image: url(../../../assets/images/home-page/Radient.png);
-background-size: cover;
-
+.navbar {
+  background-image: url(../../../assets/images/home-page/Radient.png);
+  background-size: cover;
 }

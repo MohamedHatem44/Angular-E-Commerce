@@ -4,17 +4,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
-  selector: 'app-products-form',
-  templateUrl: './products-form.component.html',
-  styleUrls: ['./products-form.component.css'],
+  selector: 'app-admin-add-product',
+  templateUrl: './admin-add-product.component.html',
+  styleUrls: ['./admin-add-product.component.css'],
 })
-export class ProductsFormComponent {
+export class AdminAddProductComponent {
   productId: any;
-  constructor(
-    private router: Router,
-    private productService: ProductService,
-    public activatedRoute: ActivatedRoute
-  ) {
+  constructor(private router: Router, private productService: ProductService, public activatedRoute: ActivatedRoute) {
     this.productId = this.activatedRoute.snapshot.params['id'];
     console.log(this.productId);
   }
@@ -39,14 +35,8 @@ export class ProductsFormComponent {
   }
   productForm = new FormGroup({
     title: new FormControl('', [Validators.required]),
-    Quantity: new FormControl('', [
-      Validators.required,
-      Validators.pattern(/^[0-9]{1,20}$/),
-    ]),
-    price: new FormControl('', [
-      Validators.required,
-      Validators.pattern(/^[0-9]{1,20}$/),
-    ]),
+    Quantity: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]{1,20}$/)]),
+    price: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]{1,20}$/)]),
     imgScr: new FormControl('', [Validators.required]),
     category: new FormControl('', [Validators.required]),
     brand: new FormControl('', [Validators.required]),
@@ -55,17 +45,13 @@ export class ProductsFormComponent {
     if (this.productForm.status == 'VALID') {
       console.log(this.productForm.value);
       if (this.productId) {
-        this.productService
-          .updateProduct(this.productId, this.productForm.value)
-          .subscribe((Response) => {
-            console.log(Response);
-          });
+        this.productService.updateProduct(this.productId, this.productForm.value).subscribe((Response) => {
+          console.log(Response);
+        });
       } else {
-        this.productService
-          .createProduct(this.productForm.value)
-          .subscribe((Response) => {
-            console.log(Response);
-          });
+        this.productService.createProduct(this.productForm.value).subscribe((Response) => {
+          console.log(Response);
+        });
       }
       this.router.navigate(['/productsDashboard']);
 

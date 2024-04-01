@@ -3,11 +3,11 @@ import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
-  selector: 'app-products-dashboard',
-  templateUrl: './products-dashboard.component.html',
-  styleUrls: ['./products-dashboard.component.css'],
+  selector: 'app-admin-products-dashboard',
+  templateUrl: './admin-products-dashboard.component.html',
+  styleUrls: ['./admin-products-dashboard.component.css'],
 })
-export class ProductsDashboardComponent implements OnInit {
+export class AdminProductsDashboardComponent implements OnInit {
   products: any[] = [];
   constructor(private productService: ProductService) {}
   ngOnInit(): void {
@@ -20,9 +20,7 @@ export class ProductsDashboardComponent implements OnInit {
       console.log(response);
       console.log(this.products);
 
-      this.products = this.products.filter(
-        (product: any) => product._id != idProduct
-      );
+      this.products = this.products.filter((product: any) => product._id != idProduct);
       console.log(this.products);
     });
   }

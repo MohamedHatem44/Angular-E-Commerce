@@ -59,6 +59,7 @@ export class RegisterComponent {
       this._AuthenticationService.register(registerForm.value).subscribe({
         next: (response) => {
           this.isLoading = false;
+          
           this._Router.navigate(['users/login']);
         },
         error: (err) => {

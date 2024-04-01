@@ -20,12 +20,16 @@
         <br />
         <input type="file" class="form-control-file" id="categoryImage" formControlName="image" name="categoryImage" accept="image/*" required />
         <br />
-        <div class="mb-5 col-sm-12 errors" *ngIf="addCategoryForm.get('image')?.errors && addCategoryForm.get('image')?.touched">
+        <div class="mb-5 col-sm-12 errors" *ngIf="addCategoryForm.get('image')?.errors && addCategoryForm.get('image')?.dirty">
           <span *ngIf="addCategoryForm.get('image')?.errors?.['required']" class="text-danger">Please select an image.</span>
+          <!-- <span *ngIf="addCategoryForm.get('image')?.errors?.['imageExtensionValidator']" class="text-danger">Invalid image format, only image files allowed.</span> -->
         </div>
         <hr />
       </div>
-      <div class="d-flex justify-content-center">
+      <div>
+        <span *ngIf="backendErrors" class="text-danger my-3">An error occurred while creating the category. Please try again.</span>
+      </div>
+      <div class="d-flex justify-content-center mt-3">
         <button type="submit" class="btn btn-success" (click)="createCategoryBtn()" [disabled]="addCategoryForm.invalid">+ Create</button>
         <button type="reset" class="btn btn-secondary ms-4" routerLink="/adminPanel/addCategory">Cancel</button>
       </div>

@@ -10,8 +10,8 @@ import { CategoryService } from 'src/app/services/category.service';
 /*-----------------------------------------------------------------*/
 export class AdminCategoriesDashboardComponent implements OnInit {
   categories: Category[] = [];
-  newCategory: any = { name: '', image: '' };
-  specificCatrgory: any = {};
+  newCategory: Category = { name: '', image: '' };
+  specificCatrgory: Category = {};
   /*-----------------------------------------------------------------*/
   // Ctor
   constructor(private _CategoryService: CategoryService) {}

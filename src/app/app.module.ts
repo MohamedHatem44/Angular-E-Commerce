@@ -5,14 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
-import { UsersComponent } from './components/users/users.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from './services/user.service';
 import { FooterComponent } from './components/footer/footer.component';
 import { ProductsComponent } from './components/products/products.component';
-import { ProductsFormComponent } from './components/products-form/products-form.component';
 import { ProductsDetailsComponent } from './components/products-details/products-details.component';
 import { BrandsComponent } from './components/brands/brands.component';
 import { CategoriesComponent } from './components/categories/categories.component';
@@ -31,17 +29,16 @@ import { AdminCategoriesDashboardComponent } from './components/admin/admin-cate
 import { AdminBrandsDashboardComponent } from './components/admin/admin-brands-dashboard/admin-brands-dashboard.component';
 import { AdminUsersDashboardComponent } from './components/admin/admin-users-dashboard/admin-users-dashboard.component';
 import { AdminOrdersDashboardComponent } from './components/admin/admin-orders-dashboard/admin-orders-dashboard.component';
+import { AdminAddProductComponent } from './components/admin/admin-add-product/admin-add-product.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    UsersComponent,
     NotFoundComponent,
     FooterComponent,
     ProductsComponent,
-    ProductsFormComponent,
     ProductsDetailsComponent,
     BrandsComponent,
     CategoriesComponent,
@@ -58,6 +55,7 @@ import { AdminOrdersDashboardComponent } from './components/admin/admin-orders-d
     AdminBrandsDashboardComponent,
     AdminUsersDashboardComponent,
     AdminOrdersDashboardComponent,
+    AdminAddProductComponent,
   ],
   imports: [BrowserModule, FormsModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule],
   providers: [

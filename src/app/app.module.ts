@@ -35,6 +35,7 @@ import { AdminOrdersDashboardComponent } from './components/admin/admin-orders-d
 import { AdminAddProductComponent } from './components/admin/admin-add-product/admin-add-product.component';
 import { AdminAddCategoryComponent } from './components/admin/admin-add-category/admin-add-category.component';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { AdminAddBrandComponent } from './components/admin/admin-add-brand/admin-add-brand.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
     AdminAddProductComponent,
     AdminAddCategoryComponent,
     ConfirmationDialogComponent,
+    AdminAddBrandComponent,
   ],
   imports: [BrowserModule, FormsModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule, MatButtonModule, MatDialogModule],
   providers: [

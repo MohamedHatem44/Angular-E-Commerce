@@ -37,7 +37,7 @@ export class AdminAddBrandComponent implements OnInit {
   /*-----------------------------------------------------------------*/
   // Brand Form
   addBrandForm = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15), Validators.pattern('^[a-zA-Z]*$')]),
+    name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15), Validators.pattern('^[a-zA-Z ]*$')]),
     image: new FormControl<File | null>(null, [Validators.required]),
   });
   /*-----------------------------------------------------------------*/

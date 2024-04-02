@@ -3,6 +3,7 @@ import { Category } from 'src/app/models/category';
 import { CategoryService } from 'src/app/services/category.service';
 import { ConfirmationDialogComponent } from '../../confirmation-dialog/confirmation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 /*-----------------------------------------------------------------*/
 @Component({
   selector: 'app-admin-categories-dashboard',
@@ -15,19 +16,11 @@ export class AdminCategoriesDashboardComponent implements OnInit {
   specificCatrgory: Category = {};
   /*-----------------------------------------------------------------*/
   // Ctor
-  constructor(private _CategoryService: CategoryService, private dialog: MatDialog) {}
+  constructor(private _CategoryService: CategoryService, private _Router: Router, private dialog: MatDialog) {}
   /*-----------------------------------------------------------------*/
   ngOnInit(): void {
     // Get list of Categories
-    this._CategoryService.getAllcategories().subscribe(
-      (response: any) => {
-        console.log(response.data);
-        this.categories = response.data;
-      },
-      (error: any) => {
-        console.error('Error fetching categories:', error);
-      }
-    );
+    this._getcategories();
   }
   /*-----------------------------------------------------------------*/
   // Get specific Category by id
@@ -63,7 +56,8 @@ export class AdminCategoriesDashboardComponent implements OnInit {
         proceed: () => {
           this._CategoryService.deleteCategory(categoryId).subscribe({
             next: () => {
-              this.categories = this.categories.filter((category: Category) => category._id !== categoryId);
+              // this.categories = this.categories.filter((category: Category) => category._id !== categoryId);
+              this._getcategories();
             },
             error: (error) => {
               console.error('Error deleting category:', error);
@@ -72,6 +66,23 @@ export class AdminCategoriesDashboardComponent implements OnInit {
         },
       },
     });
+  }
+  /*-----------------------------------------------------------------*/
+  private _getcategories() {
+    // Get list of Categories
+    this._CategoryService.getAllcategories().subscribe(
+      (response: any) => {
+        console.log(response.data);
+        this.categories = response.data;
+      },
+      (error: any) => {
+        console.error('Error fetching categories:', error);
+      }
+    );
+  }
+  /*-----------------------------------------------------------------*/
+  editCategory(categoryId: any) {
+    this._Router.navigate([`/adminPanel/editCategory/${categoryId}`]);
   }
 }
 /*-----------------------------------------------------------------*/

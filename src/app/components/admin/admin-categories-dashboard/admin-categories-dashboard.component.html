@@ -1,6 +1,6 @@
 <div class="card mb-4">
   <div class="card-body">
-    <h5 class="card-title">Categories</h5>
+    <h5 class="card-title fs-4 mb-4">Categories</h5>
     <p class="card-text">List of All Categories</p>
     <a type="button" class="btn btn-success" routerLink="/adminPanel/addCategory"> + Add</a>
   </div>
@@ -16,7 +16,6 @@
       <th scope="col">Image</th>
       <th scope="col"></th>
       <th scope="col"></th>
-      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
@@ -26,14 +25,12 @@
       <td>{{ category.name }}</td>
       <td><img [src]="category.image" alt="Category Image" width="150" height="150" /></td>
       <td>
-        <!-- <a class="btn btn-outline-warning mt-2" [routerLink]="['/products', product._id]">Edit</a> -->
+        <button type="button" class="btn btn-primary" (click)="editCategory(category._id)">Edit</button>
       </td>
       <td>
         <button type="button" class="btn btn-danger" (click)="deleteCategory(category._id)">Delete</button>
       </td>
-      <td>
-        <!-- <button class="btn btn-outline-primary mt-2" [routerLink]="['/productsDetails', product._id]">Show</button> -->
-      </td>
     </tr>
   </tbody>
 </table>
+<!----------------------------------------------------------------------------------------------->

@@ -28,12 +28,12 @@ export class CategoryService {
   }
   /*-----------------------------------------------------------------*/
   // Update specific Category
-  updateCategory(categoryId: string, category: Category): Observable<Category> {
+  updateCategory(categoryId: string, category: FormData): Observable<Category> {
     return this.httpClient.patch<Category>(`${this.baseUrl}/${categoryId}`, category);
   }
   /*-----------------------------------------------------------------*/
   // Delete specific Category
-  deleteCategory(categoryId: string): Observable<Category> {
-    return this.httpClient.delete<Category>(`${this.baseUrl}/${categoryId}`);
+  deleteCategory(categoryId: string): Observable<Object> {
+    return this.httpClient.delete<Object>(`${this.baseUrl}/${categoryId}`);
   }
 }

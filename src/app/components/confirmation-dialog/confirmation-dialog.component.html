@@ -2,9 +2,7 @@
 <mat-dialog-content>
   <p>{{ data.message }}</p>
 </mat-dialog-content>
-<mat-dialog-actions>
-  <div class="d-flex justify-content-center">
-    <button mat-button (click)="onConfirm()">Confirm</button>
-    <button mat-button (click)="onCancel()">Cancel</button>
-  </div>
+<mat-dialog-actions class="d-flex justify-content-end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button (click)="onConfirm()">Confirm</button>
 </mat-dialog-actions>

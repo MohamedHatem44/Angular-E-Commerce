@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BrandService } from '../../services/brand.service';
-import { Brands } from '../../models/brands';
+import { Brand } from '../../models/brand';
 import { ProductService } from '../../services/product.service';
 
 @Component({
@@ -9,17 +9,14 @@ import { ProductService } from '../../services/product.service';
   styleUrls: ['./brands.component.css'],
 })
 export class BrandsComponent implements OnInit {
-  constructor(
-    private _BrandsService: BrandService,
-    private _ProductsService: ProductService
-  ) {}
+  constructor(private _BrandsService: BrandService, private _ProductsService: ProductService) {}
 
-  brandsItems: Brands[] = [];
+  brandsItems: Brand[] = [];
   loading: boolean = false;
   ngOnInit(): void {
     this.loading = true;
     this._BrandsService.getAllBrands().subscribe({
-      next: (response) => {
+      next: (response: any) => {
         this.brandsItems = response.data;
         this._ProductsService.footer.emit();
         this.loading = false;

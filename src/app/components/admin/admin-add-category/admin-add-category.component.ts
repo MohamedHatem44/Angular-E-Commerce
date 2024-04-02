@@ -30,7 +30,6 @@ export class AdminAddCategoryComponent implements OnInit {
   /*-----------------------------------------------------------------*/
   addCategoryForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15), Validators.pattern('^[a-zA-Z]*$')]),
-    // image: new FormControl('', [Validators.required]),
     image: new FormControl<File | null>(null, [Validators.required]),
   });
   /*-----------------------------------------------------------------*/
@@ -47,6 +46,7 @@ export class AdminAddCategoryComponent implements OnInit {
     }
   }
   /*-----------------------------------------------------------------*/
+  // Create Category Button
   createCategoryBtn() {
     if (this.addCategoryForm.invalid) {
       return;
@@ -60,6 +60,7 @@ export class AdminAddCategoryComponent implements OnInit {
       (response: any) => {
         alert('Category created successfully.');
         this.addCategoryForm.reset();
+        this.imageDisplay = '';
       },
       (error: any) => {
         alert('An error occurred while creating the category. Please try again.');
@@ -67,5 +68,11 @@ export class AdminAddCategoryComponent implements OnInit {
       }
     );
   }
+  /*-----------------------------------------------------------------*/
+  resetAll() {
+    this.addCategoryForm.reset();
+    this.imageDisplay = '';
+    this.backendErrors = false;
+  }
+  /*-----------------------------------------------------------------*/
 }
-/*-----------------------------------------------------------------*/

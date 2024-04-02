@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from 'src/app/models/category';
 import { CategoryService } from 'src/app/services/category.service';
+import { ConfirmationDialogComponent } from '../../confirmation-dialog/confirmation-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 /*-----------------------------------------------------------------*/
 @Component({
   selector: 'app-admin-categories-dashboard',
@@ -13,7 +15,7 @@ export class AdminCategoriesDashboardComponent implements OnInit {
   specificCatrgory: Category = {};
   /*-----------------------------------------------------------------*/
   // Ctor
-  constructor(private _CategoryService: CategoryService) {}
+  constructor(private _CategoryService: CategoryService, private dialog: MatDialog) {}
   /*-----------------------------------------------------------------*/
   ngOnInit(): void {
     // Get list of Categories
@@ -55,14 +57,33 @@ export class AdminCategoriesDashboardComponent implements OnInit {
   /*-----------------------------------------------------------------*/
   // Delete specific Category
   deleteCategory(categoryId: any): void {
-    this._CategoryService.deleteCategory(categoryId).subscribe(
-      () => {
-        this.categories = this.categories.filter((category: Category) => category._id !== categoryId);
+    this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        message: 'Are you sure you want to delete this category?',
+        proceed: () => {
+          this._CategoryService.deleteCategory(categoryId).subscribe({
+            next: () => {
+              this.categories = this.categories.filter((category: Category) => category._id !== categoryId);
+            },
+            error: (error) => {
+              console.error('Error deleting category:', error);
+            },
+          });
+        },
       },
-      (error: any) => {
-        console.error('Error deleting category:', error);
-      }
-    );
+    });
   }
 }
+/*-----------------------------------------------------------------*/
+// Delete specific Category
+// deleteCategory(categoryId: any): void {
+//   this._CategoryService.deleteCategory(categoryId).subscribe(
+//     () => {
+//       this.categories = this.categories.filter((category: Category) => category._id !== categoryId);
+//     },
+//     (error: any) => {
+//       console.error('Error deleting category:', error);
+//     }
+//   );
+// }
 /*-----------------------------------------------------------------*/

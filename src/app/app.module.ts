@@ -31,6 +31,9 @@ import { AdminUsersDashboardComponent } from './components/admin/admin-users-das
 import { AdminOrdersDashboardComponent } from './components/admin/admin-orders-dashboard/admin-orders-dashboard.component';
 import { AdminAddProductComponent } from './components/admin/admin-add-product/admin-add-product.component';
 import { AdminAddCategoryComponent } from './components/admin/admin-add-category/admin-add-category.component';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -58,8 +61,9 @@ import { AdminAddCategoryComponent } from './components/admin/admin-add-category
     AdminOrdersDashboardComponent,
     AdminAddProductComponent,
     AdminAddCategoryComponent,
+    ConfirmationDialogComponent,
   ],
-  imports: [BrowserModule, FormsModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule],
+  imports: [BrowserModule, FormsModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule, MatButtonModule, MatDialogModule],
   providers: [
     UserService,
     {

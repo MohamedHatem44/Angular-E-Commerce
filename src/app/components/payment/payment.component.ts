@@ -49,6 +49,15 @@ export class PaymentComponent implements OnInit {
     await stripe.redirectToCheckout({ sessionId: session.id });
   }
 
+  async initiatePayment() {
+    const stripe = await this.stripeService.getStripe();
+    // Use Stripe methods here, such as creating a checkout session
+    const session = await this.createCheckoutSession(stripe);
+    console.log(session);
+    // Redirect the user to the checkout page
+    await stripe.redirectToCheckout({ sessionId: session.id });
+  }
+
   async createCheckoutSession(stripe: any) {
     // Make an API call to your server to create a checkout session
     const response = await fetch('http://localhost:8000/api/v1/orders/checkout-session/', {

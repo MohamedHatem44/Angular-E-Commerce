@@ -40,6 +40,7 @@ import { AdminOrdersDashboardComponent } from './components/admin/admin-orders-d
 import { AdminAddProductComponent } from './components/admin/admin-add-product/admin-add-product.component';
 import { AdminAddCategoryComponent } from './components/admin/admin-add-category/admin-add-category.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,6 +60,16 @@ import { AdminAddCategoryComponent } from './components/admin/admin-add-category
     SliderComponent,
     UserProfileComponent,
     ConfirmationDialogComponent,
+    AdminSidebarComponent,
+    AdminPanelComponent,
+    AdminDashboardComponent,
+    AdminProductsDashboardComponent,
+    AdminCategoriesDashboardComponent,
+    AdminBrandsDashboardComponent,
+    AdminUsersDashboardComponent,
+    AdminOrdersDashboardComponent,
+    AdminAddProductComponent,
+    AdminAddCategoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,17 +81,10 @@ import { AdminAddCategoryComponent } from './components/admin/admin-add-category
     MatButtonModule,
     MatDialogModule,
   ],
-  providers: [UserService, OrderService, StripeService,
-    AdminSidebarComponent,
-    AdminPanelComponent,
-    AdminDashboardComponent,
-    AdminProductsDashboardComponent,
-    AdminCategoriesDashboardComponent,
-    AdminBrandsDashboardComponent,
-    AdminUsersDashboardComponent,
-    AdminOrdersDashboardComponent,
-    AdminAddProductComponent,
-    AdminAddCategoryComponent,
+  providers: [
+    UserService,
+    OrderService,
+    StripeService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

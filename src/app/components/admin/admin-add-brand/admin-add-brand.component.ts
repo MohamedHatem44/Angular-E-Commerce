@@ -135,7 +135,7 @@ export class AdminAddBrandComponent implements OnInit {
     this._Router.navigate(['/adminPanel/brandsDashboard']);
   }
   /*-----------------------------------------------------------------*/
-  // Check Edit Mode for Brands Dashboard (Edit or Add Category)
+  // Check Edit Mode for Brands Dashboard (Edit or Add Brand)
   private checkEditMode() {
     this._Route.params.subscribe((params) => {
       if (params['id']) {
@@ -150,7 +150,7 @@ export class AdminAddBrandComponent implements OnInit {
   private _getBrandById(id: any) {
     this._BrandService.getBrandById(id).subscribe(
       (brand: any) => {
-        this.loadCategoryData(brand);
+        this.loadBrandData(brand);
       },
       (error: any) => {
         console.error('Error fetching brand by ID:', error);
@@ -159,7 +159,7 @@ export class AdminAddBrandComponent implements OnInit {
   }
   /*-----------------------------------------------------------------*/
   // Load Data Into Form When Loading Edit Form
-  private loadCategoryData(brand: any) {
+  private loadBrandData(brand: any) {
     this.addBrandForm.controls['name'].setValue(brand.data.name);
 
     // Display the image

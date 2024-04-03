@@ -19,17 +19,15 @@ export class NavbarComponent implements OnInit {
   isLoading: boolean = false;
   user: any;
   /*-----------------------------------------------------------------*/
-  cartLength:any;
-  constructor(private _AuthenticationService: AuthenticationService,private cartService:CartService, private _UserService: UserService, private router: Router) {
+  cartLength: any;
+  constructor(private _AuthenticationService: AuthenticationService, private cartService: CartService, private _UserService: UserService, private router: Router) {
     this.cartService.getUserCart();
     this.cartService.cartLength.subscribe({
       next: (value) => {
         this.cartLength = value;
-        console.log(cartService)
+        console.log(cartService);
       },
-
     });
-
   }
 
   /*-----------------------------------------------------------------*/
@@ -70,5 +68,4 @@ export class NavbarComponent implements OnInit {
       },
     });
   }
-  /**hi mousatfa */
 }

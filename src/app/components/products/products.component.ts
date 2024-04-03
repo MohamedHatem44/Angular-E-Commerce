@@ -9,7 +9,7 @@ import { CartService } from '../../services/cart.service';
   styleUrls: ['./products.component.css'],
 })
 export class ProductsComponent implements OnInit {
-  token=localStorage.getItem("userToken");
+  token = localStorage.getItem('userToken');
   constructor(private productsService: ProductService, private cartService: CartService) {}
 
   isSpin: boolean = false;
@@ -35,16 +35,16 @@ export class ProductsComponent implements OnInit {
   /*-----------------------------------------------------------------*/
   addToCart(productId: string) {
     this.isLoading = true;
-    const body={
-      user:"660419c60e2e3c90aed9864f",
+    const body = {
+      user: '660419c60e2e3c90aed9864f',
       product: productId,
-      quantity:1
-  }
-    this.cartService.AddToCart(this.token!,body).subscribe({
+      quantity: 1,
+    };
+    this.cartService.AddToCart(this.token!, body).subscribe({
       next: (response) => {
         console.log(response);
         // this.cartService.numberOFCartItems.next(response.numOfCartItems);
-        // this.isLoading = false;
+        this.isLoading = false;
         this.cartService.getUserCart();
       },
       error: (err) => {

@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { timer } from 'rxjs';
 import { Brand } from 'src/app/models/brand';
 import { BrandService } from 'src/app/services/brand.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AlertDialogComponent } from '../../dialogs/alert-dialog/alert-dialog.component';
 /*-----------------------------------------------------------------*/
 @Component({
   selector: 'app-admin-add-brand',
@@ -19,7 +21,7 @@ export class AdminAddBrandComponent implements OnInit {
   currentBrandID?: string;
   /*-----------------------------------------------------------------*/
   // Ctor
-  constructor(private _BrandService: BrandService, private _Router: Router, private _Route: ActivatedRoute) {}
+  constructor(private _BrandService: BrandService, private _Router: Router, private _Route: ActivatedRoute, private dialog: MatDialog) {}
   /*-----------------------------------------------------------------*/
   ngOnInit(): void {
     // Get list of Brands
@@ -79,6 +81,7 @@ export class AdminAddBrandComponent implements OnInit {
         alert('Brand created successfully.');
         this.addBrandForm.reset();
         this.imageDisplay = '';
+
         // Navigate to brands dashboard after a delay
         timer(1000).subscribe(() => {
           this.navigateToBrandsDashboard();
@@ -95,19 +98,35 @@ export class AdminAddBrandComponent implements OnInit {
   private _updateBrand(brandID: string, brand: FormData) {
     this._BrandService.updateBrand(brandID, brand).subscribe(
       (response: any) => {
-        alert('Brand Updated successfully.');
-        this.addBrandForm.reset();
-        this.imageDisplay = '';
-        // Navigate to Brands dashboard after a delay
-        timer(1000).subscribe(() => {
-          this.navigateToBrandsDashboard();
+        this.openAlertDialog('Success', 'Brand updated successfully.').then(() => {
+          this.addBrandForm.reset();
+          this.imageDisplay = '';
+
+          // Navigate to Brands dashboard after a delay
+          timer(1000).subscribe(() => {
+            this.navigateToBrandsDashboard();
+          });
         });
       },
       (error: any) => {
-        alert('An error occurred while Updated the Brand. Please try again.');
+        this.openAlertDialog('Error', 'An error occurred while updating the Brand. Please try again.');
         this.backendErrors = true;
       }
     );
+  }
+  /*-----------------------------------------------------------------*/
+  // Success Dialog
+  openAlertDialog(title: string, message: string): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      const dialogRef = this.dialog.open(AlertDialogComponent, {
+        width: '550px',
+        data: { title: title, message: message },
+      });
+      dialogRef.afterClosed().subscribe(() => {
+        console.log('The dialog was closed');
+        resolve();
+      });
+    });
   }
   /*-----------------------------------------------------------------*/
   // Navigate To Brands Dashboard After Add or Edit

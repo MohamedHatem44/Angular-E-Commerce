@@ -15,7 +15,7 @@ export class AdminUsersDashboardComponent implements OnInit {
   constructor(private _UserService: UserService, private dialog: MatDialog) {}
   /*-----------------------------------------------------------------*/
   ngOnInit(): void {
-    this._getAlluserss();
+    this._getAllusers();
   }
   /*-----------------------------------------------------------------*/
   // Delete specific User
@@ -27,7 +27,7 @@ export class AdminUsersDashboardComponent implements OnInit {
           this._UserService.deleteUser(userId).subscribe({
             next: () => {
               // this.users = this.users.filter((user: any) => user._id != userId);
-              this._getAlluserss();
+              this._getAllusers();
             },
             error: (error) => {
               console.error('Error deleting user:', error);
@@ -39,7 +39,7 @@ export class AdminUsersDashboardComponent implements OnInit {
   }
   /*-----------------------------------------------------------------*/
   // Get list of Users
-  private _getAlluserss() {
+  private _getAllusers() {
     this._UserService.getAllUsers().subscribe(
       (response: any) => {
         this.users = response.data;

@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 /*-----------------------------------------------------------------*/
 export class AdminProductsDashboardComponent implements OnInit {
-  products: any[] = [];
+  products: Product[] = [];
   /*-----------------------------------------------------------------*/
   // Ctor
   constructor(private _ProductService: ProductService, private _Router: Router, private dialog: MatDialog) {}

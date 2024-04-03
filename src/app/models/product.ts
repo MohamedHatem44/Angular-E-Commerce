@@ -20,4 +20,6 @@ export interface Product {
   };
   ratingsAverage?: number;
   ratingsQuantity?: number;
+  createdAt?: Date;
+  updatedAt?: Date;
 }

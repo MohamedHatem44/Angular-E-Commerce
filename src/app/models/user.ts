@@ -8,4 +8,5 @@ export interface User {
   role?: string;
   token?: string;
   active?: boolean;
+  createdAt?: Date;
 }

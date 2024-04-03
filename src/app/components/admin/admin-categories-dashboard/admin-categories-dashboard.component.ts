@@ -72,7 +72,6 @@ export class AdminCategoriesDashboardComponent implements OnInit {
   private _getcategories() {
     this._CategoryService.getAllcategories().subscribe(
       (response: any) => {
-        console.log(response.data);
         this.categories = response.data;
       },
       (error: any) => {

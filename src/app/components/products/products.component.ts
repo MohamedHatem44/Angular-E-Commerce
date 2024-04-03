@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import { Product } from '../../models/product';
 import { CartService } from '../../services/cart.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-products',
@@ -9,8 +10,9 @@ import { CartService } from '../../services/cart.service';
   styleUrls: ['./products.component.css'],
 })
 export class ProductsComponent implements OnInit {
-  token = localStorage.getItem('userToken');
-  constructor(private productsService: ProductService, private cartService: CartService) {}
+  token=localStorage.getItem("userToken");
+  userId="";
+  constructor(private productsService: ProductService, private cartService: CartService,private auth:AuthenticationService) {}
 
   isSpin: boolean = false;
   products: any[] = [];
@@ -26,6 +28,7 @@ export class ProductsComponent implements OnInit {
         this.isSpin = false;
       },
     });
+    this.userId=this.auth.getUserId();
   }
   /*-----------------------------------------------------------------*/
   getUserRole(): string | null {
@@ -33,18 +36,19 @@ export class ProductsComponent implements OnInit {
     return localStorage.getItem('role');
   }
   /*-----------------------------------------------------------------*/
+productsOnCart:any[]=[];
   addToCart(productId: string) {
-    this.isLoading = true;
-    const body = {
-      user: '660419c60e2e3c90aed9864f',
+    const body={
+      user:this.userId,
       product: productId,
       quantity: 1,
     };
     this.cartService.AddToCart(this.token!, body).subscribe({
       next: (response) => {
         console.log(response);
+        this.productsOnCart.push(productId);
         // this.cartService.numberOFCartItems.next(response.numOfCartItems);
-        this.isLoading = false;
+
         this.cartService.getUserCart();
       },
       error: (err) => {

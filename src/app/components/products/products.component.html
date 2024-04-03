@@ -28,7 +28,7 @@
         </div>
       </a>
 
-      <button *ngIf="getUserRole() !== 'admin'" (click)="addToCart(product._id)" class="btn btn-success w-50 my-2">
+      <button *ngIf="getUserRole() !== 'admin'" (click)="addToCart(product._id)" (click)="button.disabled = true" #button class="btn btn-success w-50 my-2">
         <i *ngIf="isLoading" class="fas fa-spinner fa-spin"></i>
         <span>+ Add</span>
       </button>

@@ -34,9 +34,9 @@ import { AdminUsersDashboardComponent } from './components/admin/admin-users-das
 import { AdminOrdersDashboardComponent } from './components/admin/admin-orders-dashboard/admin-orders-dashboard.component';
 import { AdminAddProductComponent } from './components/admin/admin-add-product/admin-add-product.component';
 import { AdminAddCategoryComponent } from './components/admin/admin-add-category/admin-add-category.component';
-import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { AdminAddBrandComponent } from './components/admin/admin-add-brand/admin-add-brand.component';
 import { AdminProductDetailsComponent } from './components/admin/admin-product-details/admin-product-details.component';
+import { ConfirmationDialogComponent } from './components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { AlertDialogComponent } from './components/dialogs/alert-dialog/alert-dialog.component';
 
 @NgModule({

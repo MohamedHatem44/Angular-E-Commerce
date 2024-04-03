@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-xl navbar-light bg-light pt-4">
+<nav class="navbar navbar-expand-xl navbar-light bg-light pt-3">
   <div class="container">
-    <a class="navbar-brand fs-2 fw-semibold text-white" href="#">SoftTech</a>
+    <a class="navbar-brand fs-2 fw-semibold text-white" href="#" *ngIf="!isAdmin">SoftTech</a>
     <button
       class="navbar-toggler bg-light"
       type="button"
@@ -14,21 +14,34 @@
     ><!-- burgur icon -->
 
     <div class="collapse navbar-collapse" id="collapsibleNavId">
-      <ul class="navbar-nav ms-auto justify-content-end fs-5 fw-bold">
+      <ul class="navbar-nav ms-auto justify-content-end fs-5 fw-bold" *ngIf="!isAdmin">
         <li class="nav-item">
           <a class="nav-link fw-normal" aria-current="page" routerLink="home" routerLinkActive="fw-bold text-primary" [routerLinkActiveOptions]="{ exact: true }">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link fw-normal" aria-current="page" routerLink="products" routerLinkActive="fw-bold text-primary" [routerLinkActiveOptions]="{ exact: true }">Products</a>
+          <a class="nav-link fw-normal" aria-current="page" routerLink="products" routerLinkActive="fw-bold text-primary" [routerLinkActiveOptions]="{ exact: true }"
+            >Products</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link fw-normal" aria-current="page" routerLink="categories" routerLinkActive="fw-bold text-primary" [routerLinkActiveOptions]="{ exact: true }">Categories</a>
+          <a class="nav-link fw-normal" aria-current="page" routerLink="categories" routerLinkActive="fw-bold text-primary" [routerLinkActiveOptions]="{ exact: true }"
+            >Categories</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link fw-normal" aria-current="page" routerLink="brands" routerLinkActive="fw-bold text-primary" [routerLinkActiveOptions]="{ exact: true }">Brands</a>
+          <a class="nav-link fw-normal" aria-current="page" routerLink="brands" routerLinkActive="fw-bold text-primary" [routerLinkActiveOptions]="{ exact: true }"
+            >Brands</a
+          >
         </li>
         <li class="nav-item" *ngIf="isLogin && isUser">
-          <a class="nav-link fw-normal" aria-current="page" [routerLink]="['/userprofile', currentId]" routerLinkActive="fw-bold text-primary" [routerLinkActiveOptions]="{ exact: true }">Profile</a>
+          <a
+            class="nav-link fw-normal"
+            aria-current="page"
+            [routerLink]="['/userprofile', currentId]"
+            routerLinkActive="fw-bold text-primary"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Profile</a
+          >
         </li>
       </ul>
       <!------------------------------------------------------------------------------------------------------>

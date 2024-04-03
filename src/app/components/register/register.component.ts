@@ -39,7 +39,7 @@ export class RegisterComponent implements OnInit, ICanLeavePage{
     const noChanges=isEqual(currentFormValue,this.initialFormValue)
     if (noChanges) return true;
 
-    return confirm('Are you sure you want to leave the page?');;
+    return confirm('Are you sure you want to leave the page?');
   };
 
   isLoading: boolean = false;

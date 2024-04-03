@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { timer } from 'rxjs';
@@ -6,6 +6,10 @@ import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AlertDialogComponent } from '../../dialogs/alert-dialog/alert-dialog.component';
+
+import { ICanLeavePage } from '../../../models/Can-Leave-page';
+import {isEqual} from 'lodash';
+
 /*-----------------------------------------------------------------*/
 @Component({
   selector: 'app-admin-add-product',
@@ -13,7 +17,7 @@ import { AlertDialogComponent } from '../../dialogs/alert-dialog/alert-dialog.co
   styleUrls: ['./admin-add-product.component.css'],
 })
 /*-----------------------------------------------------------------*/
-export class AdminAddProductComponent implements OnInit {
+export class AdminAddProductComponent implements OnInit,ICanLeavePage {
   products: Product[] = [];
   imageDisplay!: string | ArrayBuffer;
   backendErrors: boolean = false;
@@ -23,7 +27,30 @@ export class AdminAddProductComponent implements OnInit {
   // Ctor
   constructor(private _ProductService: ProductService, private _Router: Router, private _Route: ActivatedRoute, private dialog: MatDialog) {}
   /*-----------------------------------------------------------------*/
+  //
+  initialFormValue: any;
+  @HostListener('window:beforeunload', ['$event']) onBeforeUnload(
+    event: BeforeUnloadEvent
+  ): void {
+    if (event && !this.canLeavePage()) {
+      event.preventDefault();
+      event.returnValue = false;
+    }
+  }
+  canLeavePage= () => {
+    const currentFormValue = this.addProductForm.value;
+    const noChanges=isEqual(currentFormValue,this.initialFormValue)
+    if (noChanges) return true;
+
+    return confirm('Are you sure you want to leave the page?');;
+  };
+  //
+
   ngOnInit(): void {
+    //
+    this.initialFormValue = this.addProductForm.value;
+    console.log(this.initialFormValue);
+    //
     // Get list of Products
     this._ProductService.getAllProducts().subscribe(
       (response: any) => {

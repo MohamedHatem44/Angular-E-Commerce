@@ -24,12 +24,8 @@
       <td>{{ category._id }}</td>
       <td>{{ category.name }}</td>
       <td><img [src]="category.image" alt="Category Image" width="150" height="150" /></td>
-      <td>
-        <button type="button" class="btn btn-primary" (click)="editCategory(category._id)">Edit</button>
-      </td>
-      <td>
-        <button type="button" class="btn btn-outline-danger" (click)="deleteCategory(category._id)">Delete</button>
-      </td>
+      <td><button type="button" class="btn btn-primary" (click)="_editCategory(category._id)">Edit</button></td>
+      <td><button type="button" class="btn btn-outline-danger" (click)="_deleteCategory(category._id)">Delete</button></td>
     </tr>
   </tbody>
 </table>

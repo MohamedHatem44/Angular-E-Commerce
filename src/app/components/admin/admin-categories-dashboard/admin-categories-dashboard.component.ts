@@ -49,7 +49,7 @@ export class AdminCategoriesDashboardComponent implements OnInit {
   }
   /*-----------------------------------------------------------------*/
   // Delete specific Category
-  deleteCategory(categoryId: any): void {
+  _deleteCategory(categoryId: any): void {
     this.dialog.open(ConfirmationDialogComponent, {
       data: {
         message: 'Are you sure you want to delete this category?',
@@ -68,8 +68,8 @@ export class AdminCategoriesDashboardComponent implements OnInit {
     });
   }
   /*-----------------------------------------------------------------*/
+  // Get list of Categories
   private _getcategories() {
-    // Get list of Categories
     this._CategoryService.getAllcategories().subscribe(
       (response: any) => {
         console.log(response.data);
@@ -81,7 +81,7 @@ export class AdminCategoriesDashboardComponent implements OnInit {
     );
   }
   /*-----------------------------------------------------------------*/
-  editCategory(categoryId: any) {
+  _editCategory(categoryId: any) {
     this._Router.navigate([`/adminPanel/editCategory/${categoryId}`]);
   }
 }

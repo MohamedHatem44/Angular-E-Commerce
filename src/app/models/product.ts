@@ -10,10 +10,10 @@ export interface Product {
   image?: string;
   images: string;
   category?: {
-    name: string;
+    name?: string;
   };
   subcategories?: {
-    name: string;
+    name?: string;
   };
   brand?: {
     name: string;

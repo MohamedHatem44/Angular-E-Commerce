@@ -11,10 +11,11 @@
   <thead class="thead-light">
     <tr>
       <th scope="col">#</th>
-      <th scope="col">ID</th>
+      <!-- <th scope="col">ID</th> -->
       <th scope="col">Title</th>
       <th scope="col">Quantity</th>
       <th scope="col">Price</th>
+      <th scope="col">Created At</th>
       <th scope="col">Category</th>
       <th scope="col">Brand</th>
       <th scope="col">Image</th>
@@ -26,25 +27,18 @@
   <tbody>
     <tr *ngFor="let product of products; let i = index">
       <th scope="row">{{ i + 1 }}</th>
-      <td>{{ product._id }}</td>
+      <!-- <td>{{ product._id }}</td> -->
       <td>{{ product.title }}</td>
       <td>{{ product.quantity }}</td>
       <td>{{ product.price | currency }}</td>
+      <td>{{ product.createdAt | date : 'short' }}</td>
       <td>{{ product.category.name }}</td>
       <td>{{ product?.brand.name }}</td>
-      <td>
-        <img [src]="product.image" alt="Product Image" width="150" height="150" />
-      </td>
-
-      <td>
-        <a class="btn btn-outline-warning mt-2" [routerLink]="['/products', product._id]">Edit</a>
-      </td>
-      <td>
-        <button class="btn btn-outline-danger mt-2" (click)="deleteProduct(product._id)">Delete</button>
-      </td>
-      <td>
-        <button class="btn btn-outline-primary mt-2" [routerLink]="['/productsDetails', product._id]">Details</button>
-      </td>
+      <td><img [src]="product.image" alt="Product Image" width="100" height="100" /></td>
+      <td><button type="button" class="btn btn-outline-primary mt-3" [routerLink]="['/adminPanel/productDetails', product._id]">Details</button></td>
+      <td><button type="button" class="btn btn-primary mt-3" (click)="_editProduct(product._id)">Edit</button></td>
+      <td><button type="button" class="btn btn-outline-danger mt-3" (click)="_deleteProduct(product._id)">Delete</button></td>
     </tr>
   </tbody>
 </table>
+<!----------------------------------------------------------------------------------------------->

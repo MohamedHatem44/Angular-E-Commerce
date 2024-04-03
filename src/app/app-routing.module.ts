@@ -24,6 +24,7 @@ import { AdminOrdersDashboardComponent } from './components/admin/admin-orders-d
 import { AdminAddProductComponent } from './components/admin/admin-add-product/admin-add-product.component';
 import { AdminAddCategoryComponent } from './components/admin/admin-add-category/admin-add-category.component';
 import { AdminAddBrandComponent } from './components/admin/admin-add-brand/admin-add-brand.component';
+import { AdminProductDetailsComponent } from './components/admin/admin-product-details/admin-product-details.component';
 /*---------------------------------------------------------------------------------------------------------*/
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -36,6 +37,8 @@ const routes: Routes = [
       { path: '', component: AdminDashboardComponent, pathMatch: 'full' },
       { path: 'productsDashboard', component: AdminProductsDashboardComponent },
       { path: 'addProduct', component: AdminAddProductComponent },
+      { path: 'editProduct/:id', component: AdminAddProductComponent },
+      { path: 'productDetails/:id', component: AdminProductDetailsComponent },
       { path: 'categoriesDashboard', component: AdminCategoriesDashboardComponent },
       { path: 'addCategory', component: AdminAddCategoryComponent },
       { path: 'editCategory/:id', component: AdminAddCategoryComponent },

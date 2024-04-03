@@ -12,6 +12,8 @@ import { LoginComponent } from './components/login/login.component';
 import { CartComponent } from './components/cart/cart.component';
 import { AuthGuardService } from './guards/auth-guard.guard';
 import { AdminGuardService } from './guards/admin-guard.guard';
+import { CanDeactivatePage } from './guards/can-deactivate.guard';
+
 
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { AdminPanelComponent } from './components/admin/admin-panel/admin-panel.component';
@@ -56,7 +58,7 @@ const routes: Routes = [
   { path: 'userprofile/:id', component: UserProfileComponent, canActivate: [AuthGuardService] },
   { path: 'cart', component: CartComponent },
   { path: 'users/login', component: LoginComponent },
-  { path: 'users/register', component: RegisterComponent },
+  { path: 'users/register', component: RegisterComponent,canDeactivate: [CanDeactivatePage], },
   { path: 'productsDetails/:id', component: ProductsDetailsComponent },
   { path: '**', component: NotFoundComponent },
 ];

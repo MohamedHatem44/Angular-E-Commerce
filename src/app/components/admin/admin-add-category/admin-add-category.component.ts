@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { timer } from 'rxjs';
 import { Category } from 'src/app/models/category';
 import { CategoryService } from 'src/app/services/category.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AlertDialogComponent } from '../../dialogs/alert-dialog/alert-dialog.component';
 /*-----------------------------------------------------------------*/
 @Component({
   selector: 'app-admin-add-category',
@@ -19,7 +21,7 @@ export class AdminAddCategoryComponent implements OnInit {
   currentCategoryID?: string;
   /*-----------------------------------------------------------------*/
   // Ctor
-  constructor(private _CategoryService: CategoryService, private _Router: Router, private _Route: ActivatedRoute) {}
+  constructor(private _CategoryService: CategoryService, private _Router: Router, private _Route: ActivatedRoute, private dialog: MatDialog) {}
   /*-----------------------------------------------------------------*/
   ngOnInit(): void {
     // Get list of Categories
@@ -76,16 +78,18 @@ export class AdminAddCategoryComponent implements OnInit {
   private _addCategory(category: FormData) {
     this._CategoryService.createCategory(category).subscribe(
       (response: any) => {
-        alert('Category created successfully.');
-        this.addCategoryForm.reset();
-        this.imageDisplay = '';
-        // Navigate to categories dashboard after a delay
-        timer(1000).subscribe(() => {
-          this.navigateToCategoriesDashboard();
+        this.openAlertDialog('Success', 'Category Created successfully.').then(() => {
+          this.addCategoryForm.reset();
+          this.imageDisplay = '';
+
+          // Navigate to categories dashboard after a delay
+          timer(1000).subscribe(() => {
+            this.navigateToCategoriesDashboard();
+          });
         });
       },
       (error: any) => {
-        alert('An error occurred while creating the category. Please try again.');
+        this.openAlertDialog('Error', 'An error occurred while creating the category. Please try again.');
         this.backendErrors = true;
       }
     );
@@ -95,19 +99,37 @@ export class AdminAddCategoryComponent implements OnInit {
   private _updateCategory(categoryID: string, category: FormData) {
     this._CategoryService.updateCategory(categoryID, category).subscribe(
       (response: any) => {
-        alert('Category Updated successfully.');
-        this.addCategoryForm.reset();
-        this.imageDisplay = '';
-        // Navigate to categories dashboard after a delay
-        timer(1000).subscribe(() => {
-          this.navigateToCategoriesDashboard();
+        this.openAlertDialog('Success', 'Category updated successfully.').then(() => {
+          this.addCategoryForm.reset();
+          this.imageDisplay = '';
+
+          // Navigate to categories dashboard after a delay
+          timer(1000).subscribe(() => {
+            this.navigateToCategoriesDashboard();
+          });
         });
       },
       (error: any) => {
         alert('An error occurred while Updated the category. Please try again.');
+        this.openAlertDialog('Error', 'An error occurred while updating the category. Please try again.');
+
         this.backendErrors = true;
       }
     );
+  }
+  /*-----------------------------------------------------------------*/
+  // Alert Dialog
+  openAlertDialog(title: string, message: string): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      const dialogRef = this.dialog.open(AlertDialogComponent, {
+        width: '550px',
+        data: { title: title, message: message },
+      });
+      dialogRef.afterClosed().subscribe(() => {
+        console.log('The dialog was closed');
+        resolve();
+      });
+    });
   }
   /*-----------------------------------------------------------------*/
   // Navigate To Categories Dashboard After Add or Edit

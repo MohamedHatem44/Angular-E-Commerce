@@ -91,7 +91,7 @@
       <!----------------------------------------------------------------------------------------------->
       <!-- Product Ratings Quantity -->
       <div class="mb-3">
-        <label for="productRatingsQuantity" class="form-label">Product Ratings Average</label>
+        <label for="productRatingsQuantity" class="form-label">Product Ratings Quantity</label>
         <input type="number" class="form-control" id="productRatingsQuantity" formControlName="ratingsQuantity" name="productRatingsQuantity" />
         <div class="mb-2 col-sm-12 errors" *ngIf="addProductForm.get('ratingsQuantity')?.errors && addProductForm.get('ratingsQuantity')?.touched">
           <span *ngIf="addProductForm.get('ratingsQuantity')?.errors?.['pattern']" class="text-danger">Invalid Ratings Quantity only Numbers allowed.</span>
@@ -99,6 +99,24 @@
       </div>
       <!----------------------------------------------------------------------------------------------->
       <hr />
+      <!----------------------------------------------------------------------------------------------->
+      <!-- Category Dropdown -->
+      <label for="productCategory" class="form-label">Category</label>
+      <select class="form-select mb-3" formControlName="category">
+        <option *ngFor="let category of categories" [value]="category._id">{{ category.name }}</option>
+      </select>
+      <div class="mb-2 col-sm-12 errors" *ngIf="addProductForm.get('category')?.errors && addProductForm.get('category')?.touched">
+        <span *ngIf="addProductForm.get('category')?.errors?.['required']" class="text-danger">Product Category is required.</span>
+      </div>
+      <!----------------------------------------------------------------------------------------------->
+      <!-- Brand Dropdown -->
+      <label for="productBrand" class="form-label">Brand</label>
+      <select class="form-select mb-3" formControlName="brand">
+        <option *ngFor="let brand of brands" [value]="brand._id">{{ brand.name }}</option>
+      </select>
+      <div class="mb-2 col-sm-12 errors" *ngIf="addProductForm.get('brand')?.errors && addProductForm.get('brand')?.touched">
+        <span *ngIf="addProductForm.get('brand')?.errors?.['required']" class="text-danger">Product Brand is required.</span>
+      </div>
       <!----------------------------------------------------------------------------------------------->
       <!-- Product Image -->
       <div class="mb-2">
@@ -113,8 +131,9 @@
         <div class="mb-5 col-sm-12 errors" *ngIf="addProductForm.get('image')?.errors && (addProductForm.get('image')?.touched || addProductForm.get('image')?.value)">
           <span *ngIf="addProductForm.get('image')?.errors?.['required']" class="text-danger">Please select an image.</span>
         </div>
-        <hr />
       </div>
+      <!----------------------------------------------------------------------------------------------->
+      <hr />
       <!----------------------------------------------------------------------------------------------->
       <div>
         <span *ngIf="backendErrors" class="text-danger my-3">An error occurred while creating the brand. Please try again.</span>

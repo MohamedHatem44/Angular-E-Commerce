@@ -39,6 +39,7 @@ import { AdminProductDetailsComponent } from './components/admin/admin-product-d
 import { ConfirmationDialogComponent } from './components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { AlertDialogComponent } from './components/dialogs/alert-dialog/alert-dialog.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

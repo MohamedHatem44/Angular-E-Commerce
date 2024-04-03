@@ -12,6 +12,8 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 export class ProductsComponent implements OnInit {
   token=localStorage.getItem("userToken");
   userId="";
+  searchProduct:any;
+
   constructor(private productsService: ProductService, private cartService: CartService,private auth:AuthenticationService) {}
 
   isSpin: boolean = false;
@@ -24,11 +26,13 @@ export class ProductsComponent implements OnInit {
     this.productsService.getAllProducts().subscribe({
       next: (response) => {
         this.products = response.data;
+        this.searchProduct=[...this.products];
         this.productsService.footer.emit();
         this.isSpin = false;
       },
     });
     this.userId=this.auth.getUserId();
+
   }
   /*-----------------------------------------------------------------*/
   getUserRole(): string | null {
@@ -57,4 +61,15 @@ productsOnCart:any[]=[];
       },
     });
   }
+  /*-----------------------------------------------------------------*/
+  onChange(event:Event){
+this.searchProduct=[...this.products];
+if ((event.target as HTMLInputElement).value) {
+this.searchProduct=this.searchProduct.filter((product:any)=>product.title.toLowerCase().includes((event.target as HTMLInputElement).value.toLowerCase()));
 }
+else{
+  this.searchProduct=[...this.products];
+}
+  }
+}
+

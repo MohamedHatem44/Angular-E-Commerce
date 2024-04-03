@@ -28,11 +28,8 @@ export class NavbarComponent implements OnInit {
     this.cartService.cartLength.subscribe({
       next: (value) => {
         this.cartLength = value;
-        console.log(value,"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
       },
-
     });
-
   }
 
   /*-----------------------------------------------------------------*/
@@ -87,5 +84,4 @@ export class NavbarComponent implements OnInit {
   getUserCartRequest(){
     return this.httpClient.get('http://localhost:8000/api/v1/carts');
   }
-  /**hi mousatfa */
 }

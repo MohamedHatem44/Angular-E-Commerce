@@ -18,7 +18,6 @@ export class AdminBrandsDashboardComponent implements OnInit {
   // Ctor
   constructor(private _BrandService: BrandService, private _Router: Router, private dialog: MatDialog) {}
   /*-----------------------------------------------------------------*/
-  /*-----------------------------------------------------------------*/
   ngOnInit(): void {
     // Get list of Brands
     this._getAllBrands();

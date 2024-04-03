@@ -1,12 +1,25 @@
 export interface Product {
-  imageCover: string;
+  _id: string;
   title: string;
-  category: {
+  description: string;
+  quantity: number;
+  sold?: number;
+  price: number;
+  priceAfterDiscount?: number;
+  colors?: string[];
+  image?: string;
+  images: string;
+  category?: {
+    name?: string;
+  };
+  subcategories?: {
+    name?: string;
+  };
+  brand?: {
     name: string;
   };
-  price: number;
-  ratingsAverage: number;
-  _id: string;
-  description: string;
-  images: string;
+  ratingsAverage?: number;
+  ratingsQuantity?: number;
+  createdAt?: Date;
+  updatedAt?: Date;
 }

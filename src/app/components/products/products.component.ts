@@ -38,18 +38,17 @@ export class ProductsComponent implements OnInit {
   /*-----------------------------------------------------------------*/
 productsOnCart:any[]=[];
   addToCart(productId: string) {
-
     const body={
       user:this.userId,
       product: productId,
-      quantity:1
-  }
-    this.cartService.AddToCart(this.token!,body).subscribe({
+      quantity: 1,
+    };
+    this.cartService.AddToCart(this.token!, body).subscribe({
       next: (response) => {
         console.log(response);
         this.productsOnCart.push(productId);
         // this.cartService.numberOFCartItems.next(response.numOfCartItems);
-        //this.isLoading = false;
+
         this.cartService.getUserCart();
       },
       error: (err) => {

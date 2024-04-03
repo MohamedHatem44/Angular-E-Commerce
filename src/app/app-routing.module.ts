@@ -38,7 +38,7 @@ const routes: Routes = [
     children: [
       { path: '', component: AdminDashboardComponent, pathMatch: 'full' },
       { path: 'productsDashboard', component: AdminProductsDashboardComponent },
-      { path: 'addProduct', component: AdminAddProductComponent },
+      { path: 'addProduct', component: AdminAddProductComponent ,canDeactivate: [CanDeactivatePage],},
       { path: 'editProduct/:id', component: AdminAddProductComponent },
       { path: 'productDetails/:id', component: AdminProductDetailsComponent },
       { path: 'categoriesDashboard', component: AdminCategoriesDashboardComponent },
@@ -56,7 +56,7 @@ const routes: Routes = [
   { path: 'brands', component: BrandsComponent },
   { path: 'cart', component: CartComponent, canActivate: [AuthGuardService] },
   { path: 'userprofile/:id', component: UserProfileComponent, canActivate: [AuthGuardService] },
-  { path: 'cart', component: CartComponent },
+  { path: 'cart', component: CartComponent ,canActivate: [AuthGuardService]},
   { path: 'users/login', component: LoginComponent },
   { path: 'users/register', component: RegisterComponent,canDeactivate: [CanDeactivatePage], },
   { path: 'productsDetails/:id', component: ProductsDetailsComponent },

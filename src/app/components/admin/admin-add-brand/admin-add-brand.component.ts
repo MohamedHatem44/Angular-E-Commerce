@@ -78,17 +78,18 @@ export class AdminAddBrandComponent implements OnInit {
   private _addBrand(brand: FormData) {
     this._BrandService.createBrand(brand).subscribe(
       (response: any) => {
-        alert('Brand created successfully.');
-        this.addBrandForm.reset();
-        this.imageDisplay = '';
+        this.openAlertDialog('Success', 'Brand Created successfully.').then(() => {
+          this.addBrandForm.reset();
+          this.imageDisplay = '';
 
-        // Navigate to brands dashboard after a delay
-        timer(1000).subscribe(() => {
-          this.navigateToBrandsDashboard();
+          // Navigate to Brands dashboard after a delay
+          timer(1000).subscribe(() => {
+            this.navigateToBrandsDashboard();
+          });
         });
       },
       (error: any) => {
-        alert('An error occurred while creating the brand. Please try again.');
+        this.openAlertDialog('Error', 'An error occurred while creating the Brand. Please try again.');
         this.backendErrors = true;
       }
     );

@@ -116,7 +116,7 @@ export class AdminAddBrandComponent implements OnInit {
     );
   }
   /*-----------------------------------------------------------------*/
-  // Success Dialog
+  // Alert Dialog
   openAlertDialog(title: string, message: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       const dialogRef = this.dialog.open(AlertDialogComponent, {

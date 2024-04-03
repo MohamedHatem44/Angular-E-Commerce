@@ -11,30 +11,30 @@ export class BrandService {
   baseUrl = 'http://localhost:8000/api/v1/brands';
   /*-----------------------------------------------------------------*/
   // Ctor
-  constructor(private httpClient: HttpClient) {}
+  constructor(private _HttpClient: HttpClient) {}
   /*-----------------------------------------------------------------*/
   // Get list of Brands
   getAllBrands(): Observable<Brand[]> {
-    return this.httpClient.get<Brand[]>(this.baseUrl);
+    return this._HttpClient.get<Brand[]>(this.baseUrl);
   }
   /*-----------------------------------------------------------------*/
   // Get specific Brand by id
   getBrandById(brandId: string): Observable<Brand> {
-    return this.httpClient.get<Brand>(`${this.baseUrl}/${brandId}`);
+    return this._HttpClient.get<Brand>(`${this.baseUrl}/${brandId}`);
   }
   /*-----------------------------------------------------------------*/
   // Create Brand
   createBrand(brand: FormData): Observable<Brand> {
-    return this.httpClient.post<Brand>(this.baseUrl, brand);
+    return this._HttpClient.post<Brand>(this.baseUrl, brand);
   }
   /*-----------------------------------------------------------------*/
   // Update specific Brand
   updateBrand(brandId: string, brand: FormData): Observable<Brand> {
-    return this.httpClient.patch<Brand>(`${this.baseUrl}/${brandId}`, brand);
+    return this._HttpClient.patch<Brand>(`${this.baseUrl}/${brandId}`, brand);
   }
   /*-----------------------------------------------------------------*/
   // Delete specific Brand
   deleteBrand(brandId: string): Observable<Object> {
-    return this.httpClient.delete<Object>(`${this.baseUrl}/${brandId}`);
+    return this._HttpClient.delete<Object>(`${this.baseUrl}/${brandId}`);
   }
 }

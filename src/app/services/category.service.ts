@@ -11,30 +11,30 @@ export class CategoryService {
   baseUrl = 'http://localhost:8000/api/v1/categories';
   /*-----------------------------------------------------------------*/
   // Ctor
-  constructor(private httpClient: HttpClient) {}
+  constructor(private _HttpClient: HttpClient) {}
   /*-----------------------------------------------------------------*/
   // Get list of Categories
   getAllcategories(): Observable<Category[]> {
-    return this.httpClient.get<Category[]>(this.baseUrl);
+    return this._HttpClient.get<Category[]>(this.baseUrl);
   }
   /*-----------------------------------------------------------------*/
   // Get specific Category by id
   getCategoryById(categoryId: string): Observable<Category> {
-    return this.httpClient.get<Category>(`${this.baseUrl}/${categoryId}`);
+    return this._HttpClient.get<Category>(`${this.baseUrl}/${categoryId}`);
   }
   /*-----------------------------------------------------------------*/
   // Create Category
   createCategory(category: FormData): Observable<Category> {
-    return this.httpClient.post<Category>(this.baseUrl, category);
+    return this._HttpClient.post<Category>(this.baseUrl, category);
   }
   /*-----------------------------------------------------------------*/
   // Update specific Category
   updateCategory(categoryId: string, category: FormData): Observable<Category> {
-    return this.httpClient.patch<Category>(`${this.baseUrl}/${categoryId}`, category);
+    return this._HttpClient.patch<Category>(`${this.baseUrl}/${categoryId}`, category);
   }
   /*-----------------------------------------------------------------*/
   // Delete specific Category
   deleteCategory(categoryId: string): Observable<Object> {
-    return this.httpClient.delete<Object>(`${this.baseUrl}/${categoryId}`);
+    return this._HttpClient.delete<Object>(`${this.baseUrl}/${categoryId}`);
   }
 }

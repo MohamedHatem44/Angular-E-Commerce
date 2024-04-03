@@ -70,7 +70,6 @@ export class AdminBrandsDashboardComponent implements OnInit {
   /*-----------------------------------------------------------------*/
   // Get list of Brands
   private _getAllBrands() {
-    // Get list of Categories
     this._BrandService.getAllBrands().subscribe(
       (response: any) => {
         this.brands = response.data;

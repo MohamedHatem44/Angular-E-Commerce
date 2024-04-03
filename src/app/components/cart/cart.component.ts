@@ -8,12 +8,13 @@ import { CartService } from 'src/app/services/cart.service';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent {
-  constructor(private _AuthenticationService: AuthenticationService,private cartService:CartService) {}
+  constructor(private _AuthenticationService: AuthenticationService,private cartService:CartService,private auth:AuthenticationService) {}
   products:any=[];
   carts:any=[];
-
+  userId="";
   ngOnInit(): void {
    this.getUserCart();
+   this.userId=this.auth.getUserId();
   }
 //========================================================================
 plus(id:string,quantity:number){
@@ -73,6 +74,7 @@ getUserCart(){
             return cart;
           })
           console.log(this.carts);
+          this.carts=this.carts.filter((cart:any)=>this.userId===cart.user);
         }
       });
     },
@@ -82,7 +84,7 @@ getUserCart(){
 }
 //========================================================================
 deleteUserCart(){
-  this.cartService.deleteUserCart(this.products[0].user).subscribe({
+  this.cartService.deleteUserCart(this.userId).subscribe({
     next:()=>{
       console.log(Response);
       this.getUserCart();

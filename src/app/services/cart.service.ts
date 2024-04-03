@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { AuthenticationService } from './authentication.service';
 
 
 
@@ -8,9 +9,10 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CartService {
-  constructor(private httpClient:HttpClient) {}
-
+  constructor(private httpClient:HttpClient,private auth:AuthenticationService) {}
+userId="";
   /**Frist Method Add To Cart */
+
   getUserCartRequest(){
     return this.httpClient.get('http://localhost:8000/api/v1/carts');
   }
@@ -54,11 +56,10 @@ export class CartService {
   getUserCart(){
     this.getUserCartRequest().subscribe({
       next:async (data:any)=>{
+      this.userId=this.auth.getUserId();
       this.products=data;
-      console.log(this.products);
-      this.cartLength.next(await this.products.data.length);
-              console.log(this.products);
-        console.log(this.cartLength);
+      this.products=this.products.data.filter((cart:any)=>cart.user==this.userId);
+      this.cartLength.next(await this.products.length);
 
       },
       error:(error)=>console.log(error),

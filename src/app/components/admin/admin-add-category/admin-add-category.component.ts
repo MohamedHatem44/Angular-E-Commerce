@@ -4,12 +4,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { timer } from 'rxjs';
 import { Category } from 'src/app/models/category';
 import { CategoryService } from 'src/app/services/category.service';
-
+/*-----------------------------------------------------------------*/
 @Component({
   selector: 'app-admin-add-category',
   templateUrl: './admin-add-category.component.html',
   styleUrls: ['./admin-add-category.component.css'],
 })
+/*-----------------------------------------------------------------*/
 export class AdminAddCategoryComponent implements OnInit {
   categories: Category[] = [];
   imageDisplay!: string | ArrayBuffer;
@@ -34,11 +35,13 @@ export class AdminAddCategoryComponent implements OnInit {
     this.checkEditMode();
   }
   /*-----------------------------------------------------------------*/
+  // Category Form
   addCategoryForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15), Validators.pattern('^[a-zA-Z]*$')]),
     image: new FormControl<File | null>(null, [Validators.required]),
   });
   /*-----------------------------------------------------------------*/
+  // Image Upload
   onImageUpload(event: any) {
     const file = event.target.files[0];
     if (file) {
@@ -52,7 +55,7 @@ export class AdminAddCategoryComponent implements OnInit {
     }
   }
   /*-----------------------------------------------------------------*/
-  // Create Category Button
+  // Create Category Button (Edit or Add Category)
   createCategoryBtn() {
     if (this.addCategoryForm.invalid) {
       return;
@@ -69,6 +72,7 @@ export class AdminAddCategoryComponent implements OnInit {
     }
   }
   /*-----------------------------------------------------------------*/
+  // Get specific Category by id
   private _addCategory(category: FormData) {
     this._CategoryService.createCategory(category).subscribe(
       (response: any) => {
@@ -87,6 +91,7 @@ export class AdminAddCategoryComponent implements OnInit {
     );
   }
   /*-----------------------------------------------------------------*/
+  // Update specific Category
   private _updateCategory(categoryID: string, category: FormData) {
     this._CategoryService.updateCategory(categoryID, category).subscribe(
       (response: any) => {
@@ -105,16 +110,12 @@ export class AdminAddCategoryComponent implements OnInit {
     );
   }
   /*-----------------------------------------------------------------*/
+  // Navigate To Categories Dashboard After Add or Edit
   navigateToCategoriesDashboard() {
     this._Router.navigate(['/adminPanel/categoriesDashboard']);
   }
   /*-----------------------------------------------------------------*/
-  resetAll() {
-    this.addCategoryForm.reset();
-    this.imageDisplay = '';
-    this.backendErrors = false;
-  }
-  /*-----------------------------------------------------------------*/
+  // Check Edit Mode for Categories Dashboard (Edit or Add Category)
   private checkEditMode() {
     this._Route.params.subscribe((params) => {
       if (params['id']) {
@@ -125,6 +126,19 @@ export class AdminAddCategoryComponent implements OnInit {
     });
   }
   /*-----------------------------------------------------------------*/
+  // Get specific Category by id
+  private _getCategoryById(id: any) {
+    this._CategoryService.getCategoryById(id).subscribe(
+      (category: any) => {
+        this.loadCategoryData(category);
+      },
+      (error: any) => {
+        console.error('Error fetching category by ID:', error);
+      }
+    );
+  }
+  /*-----------------------------------------------------------------*/
+  // Load Data Into Form When Loading Edit Form
   private loadCategoryData(category: any) {
     this.addCategoryForm.controls['name'].setValue(category.data.name);
 
@@ -136,15 +150,11 @@ export class AdminAddCategoryComponent implements OnInit {
     image.src = category.data.image;
   }
   /*-----------------------------------------------------------------*/
-  private _getCategoryById(id: any) {
-    this._CategoryService.getCategoryById(id).subscribe(
-      (category: any) => {
-        this.loadCategoryData(category);
-      },
-      (error: any) => {
-        console.error('Error fetching category by ID:', error);
-      }
-    );
+  // Reset All Form
+  resetAll() {
+    this.addCategoryForm.reset();
+    this.imageDisplay = '';
+    this.backendErrors = false;
   }
   /*-----------------------------------------------------------------*/
 }

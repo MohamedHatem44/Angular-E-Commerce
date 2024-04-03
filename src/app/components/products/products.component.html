@@ -14,7 +14,7 @@
     <div class="product px-2 py-4">
       <a [routerLink]="['/productsDetails', product._id]">
         <img class="w-100" src="{{ product.image }}" />
-        <span class="text-main fw-bold font-sm">{{ product.category.name }}</span>
+
         <h3 class="h6 fw-bolder">
           {{ product.title.split(' ').splice(0, 2).join(' ') }}
         </h3>

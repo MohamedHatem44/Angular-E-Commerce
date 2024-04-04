@@ -1,78 +1,39 @@
-// import { Component, OnInit } from '@angular/core';
-// import { StripeService } from '../../services/payment.service';
-
-// @Component({
-//   selector: 'app-payment',
-//   templateUrl: './payment.component.html',
-//   styleUrls: ['./payment.component.css']
-// })
-// export class PaymentComponent implements OnInit {
-//   paymentDetails: any = {
-//     // Define properties for payment details (e.g., card number, expiry date, etc.)
-//   };
-
-//   constructor(private paymentService: StripeService) { }
-
-//   ngOnInit(): void {
-//     // Initialization logic
-//   }
-
-//   submitPayment(): void {
-//     this.paymentService.processPayment(this.paymentDetails).subscribe(
-//       (response) => {
-//         // Handle successful payment
-//       },
-//       (error) => {
-//         console.error('Error processing payment:', error);
-//       }
-//     );
-//   }
-
-// payment.component.ts
 import { Component, OnInit } from '@angular/core';
-import { StripeService } from '../../services/payment.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.css']
 })
+
 export class PaymentComponent implements OnInit {
-  constructor(private stripeService: StripeService) {}
+  paymentForm!: FormGroup;
 
-  async ngOnInit() {
-    const stripe = await this.stripeService.getStripe();
-    // Use Stripe methods here, such as creating a checkout session
-    const session = await this.createCheckoutSession(stripe);
-    console.log(session);
-    // Redirect the user to the checkout page
-    await stripe.redirectToCheckout({ sessionId: session.id });
+  constructor(private fb: FormBuilder, private router: Router) {}
+
+  ngOnInit(): void {
+    this.createPaymentForm();
   }
 
-  async initiatePayment() {
-    const stripe = await this.stripeService.getStripe();
-    // Use Stripe methods here, such as creating a checkout session
-    const session = await this.createCheckoutSession(stripe);
-    console.log(session);
-    // Redirect the user to the checkout page
-    await stripe.redirectToCheckout({ sessionId: session.id });
-  }
-
-  async createCheckoutSession(stripe: any) {
-    // Make an API call to your server to create a checkout session
-    const response = await fetch('http://localhost:8000/api/v1/orders/checkout-session/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        // Add any data required for creating the checkout session
-      })
+  createPaymentForm(): void {
+    this.paymentForm = this.fb.group({
+      name: ['', Validators.required],
+      cardNumber: ['', [Validators.required, Validators.pattern('^[0-9]{16}$')]],
+      expirationDate: ['', [Validators.required, Validators.pattern('(0[1-9]|10|11|12)/[0-9]{2}$')]],
+      cvv: ['', [Validators.required, Validators.pattern('^[0-9]{3}$')]]
     });
-    const data = await response.json();
-    return data.session;
   }
+
+  processPayment(event: Event): void {
+    event.preventDefault();
+        if (this.paymentForm.valid) {
+      alert('Payment processed successfully!');
+      this.router.navigate(['/Orders']);
+    } else {
+      alert('Please check the entered payment details.');
+    }
+  }
+  
 }
-
-
-

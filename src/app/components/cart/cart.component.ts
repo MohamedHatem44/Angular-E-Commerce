@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { CartService } from 'src/app/services/cart.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -8,7 +9,7 @@ import { CartService } from 'src/app/services/cart.service';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent {
-  constructor(private _AuthenticationService: AuthenticationService,private cartService:CartService,private auth:AuthenticationService) {}
+  constructor(private _AuthenticationService: AuthenticationService,private cartService:CartService,private auth:AuthenticationService, private router: Router) {}
   products:any=[];
   carts:any=[];
   userId="";
@@ -91,6 +92,11 @@ deleteUserCart(){
       this.cartService.getUserCart();
     },
   })
+}
+//========================================================================
+navigateToPaymentPage(): void {
+  // Navigate to the payment page route
+  this.router.navigate(['/payment']);
 }
 }
 

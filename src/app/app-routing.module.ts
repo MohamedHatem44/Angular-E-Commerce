@@ -10,6 +10,8 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { CartComponent } from './components/cart/cart.component';
+import { OrderComponent } from './components/order/order.component';
+import { PaymentComponent } from './components/payment/payment.component';
 import { AuthGuardService } from './guards/auth-guard.guard';
 import { AdminGuardService } from './guards/admin-guard.guard';
 import { CanDeactivatePage } from './guards/can-deactivate.guard';
@@ -61,6 +63,11 @@ const routes: Routes = [
   { path: 'users/login', component: LoginComponent },
   { path: 'users/register', component: RegisterComponent, canDeactivate: [CanDeactivatePage] },
   { path: 'productsDetails/:id', component: ProductsDetailsComponent },
+  
+  //Order
+  { path: 'Orders', component: OrderComponent },
+  { path: 'payment', component: PaymentComponent },
+  // { path: '', redirectTo: '/orders', pathMatch: 'full' },
   { path: '**', component: NotFoundComponent },
 ];
 /*---------------------------------------------------------------------------------------------------------*/

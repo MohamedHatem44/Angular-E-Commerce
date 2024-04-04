@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
+// import { MatDialogModule } from '@angular/material/dialog';
+// import { MatButtonModule } from '@angular/material/button';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,10 +20,18 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { CartComponent } from './components/cart/cart.component';
+import { OrderComponent } from './components/order/order.component';
+import { PaymentComponent } from './components/payment/payment.component';
+import { OrderService } from './services/order.service';
+import { StripeService } from './services/payment.service';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SliderComponent } from './components/slider/slider.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+// import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 import { AdminSidebarComponent } from './components/admin/admin-sidebar/admin-sidebar.component';
 import { AdminPanelComponent } from './components/admin/admin-panel/admin-panel.component';
 import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard.component';
@@ -41,6 +49,8 @@ import { AlertDialogComponent } from './components/dialogs/alert-dialog/alert-di
 import { UserEditProfileComponent } from './components/user-edit-profile/user-edit-profile.component';
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,8 +65,11 @@ import { UserEditProfileComponent } from './components/user-edit-profile/user-ed
     RegisterComponent,
     LoginComponent,
     CartComponent,
+    OrderComponent,
+    PaymentComponent,
     SliderComponent,
     UserProfileComponent,
+    ConfirmationDialogComponent,
     AdminSidebarComponent,
     AdminPanelComponent,
     AdminDashboardComponent,
@@ -73,9 +86,20 @@ import { UserEditProfileComponent } from './components/user-edit-profile/user-ed
     AlertDialogComponent,
     UserEditProfileComponent,
   ],
-  imports: [BrowserModule, FormsModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule, MatButtonModule, MatDialogModule],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    NoopAnimationsModule,
+    MatButtonModule,
+    MatDialogModule
+  ],
   providers: [
     UserService,
+    OrderService,
+    StripeService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

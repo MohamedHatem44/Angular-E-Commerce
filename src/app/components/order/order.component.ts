@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../../services/order.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-order',
@@ -24,74 +24,64 @@ export class OrderComponent implements OnInit {
     this.fetchOrdersByUser();
   }
 
-  // fetchOrders() {
-  //   console.log(this.authService.getUserId())
-  //   this.orderService.getAllOrders().subscribe({
-  //     next: (response) => {
-  //       this.orders = response.data;
-  //       this.loading = false;
-  //     },
-  //     error: (err) => {
-  //       this.loading = false;
-  //     },
-  //   });
-  // }
+  // fetchOrdersByUser() {
+  //   // Retrieve user ID and role from local storage
+  //   var userId = localStorage.getItem('currentid') || "";
+  //   var userRole = localStorage.getItem('role') || "";
+  
+  //   console.log(userId);
+  //   console.log(userRole);
+  
+  //   // if (userRole === 'admin') {
+  //   //   // If user is admin, fetch all orders
+  //   //   this.orderService.getAllOrders().subscribe({
+  //   //     next: (response) => {
+  //   //       this.orders = response;
+  //   //       this.loading = false;
+  //   //     },
+  //   //     error: (err) => {
+  //   //       console.error("Error fetching all orders:", err);
+  //   //       this.loading = false;
+  //   //     }
+  //   //   });
+  //   // } else {
+  //   //   // If user is not admin, fetch orders specific to the user
 
+  //     this.orderService.getOrdersByUser(userId).subscribe({
+  //       next: (response) => {
+  //         this.orders = response;
+  //         this.loading = false;
+  //         console.log(this.fetchOrdersByUser());
+  //       },
+  //       error: (err) => {
+  //         console.error("Error fetching orders by user:", err);
+  //         this.loading = false;
+  //       }
+  //     });
+  //   // }
+  // }
+  
   fetchOrdersByUser() {
-    // Retrieve user ID and role from local storage
-    var userId = localStorage.getItem('currentid') || "";
-    var userRole = localStorage.getItem('role') || "";
+    const userId = localStorage.getItem('currentid') || "";
+    // const userRole = localStorage.getItem('role') || "";
   
-    console.log(userId);
-    console.log(userRole);
-  
-    if (userRole === 'admin') {
-      // If user is admin, fetch all orders
-      this.orderService.getAllOrders().subscribe({
-        next: (response) => {
-          this.orders = response;
-          this.loading = false;
-        },
-        error: (err) => {
-          console.error("Error fetching all orders:", err);
-          this.loading = false;
-        }
-      });
-    } else {
-      // If user is not admin, fetch orders specific to the user
+    if (userId) {
       this.orderService.getOrdersByUser(userId).subscribe({
         next: (response) => {
           this.orders = response;
           this.loading = false;
+          console.log("Orders fetched successfully:", this.orders);
         },
         error: (err) => {
           console.error("Error fetching orders by user:", err);
           this.loading = false;
         }
       });
+    } else {
+      console.error("User ID not found");
+      this.loading = false;
     }
   }
-  
-
-  // fetchOrders() {
-  //   console.log(this.authService.getUserId());
-  //   this.orderService.getAllOrders().subscribe({
-  //     next: (response) => {
-  //       const orders = response.data;
-  //       const userRole = this.authService.getUserRole();
-  //       if (userRole === 'admin') {
-  //         this.orders = orders;
-  //       } else {
-  //         // Filter orders based on the user ID
-  //         this.orders = orders.filter((order: { userId: any; }) => order.userId === this.authService.getUserId());
-  //       }
-  //       this.loading = false;
-  //     },
-  //     error: (err) => {
-  //       this.loading = false;
-  //     },
-  //   });
-  // }
   
 
   cancelOrder(orderId: string) {
@@ -103,18 +93,16 @@ export class OrderComponent implements OnInit {
             next: () => {
               this.orders = this.orders.filter((order) => order.id !== orderId);
               this.loading = false;
-              this.fetchOrdersByUser(); // Refresh the orders list
+              this.fetchOrdersByUser();
             },
             error: (err) => {
               this.loading = false;
-              // Display an error message to the user
               console.error(err);
             }
           });
         }
       }
     });
-    this.fetchOrdersByUser();
   }
 
   calculateOrderAge(orderDate: Date): number {

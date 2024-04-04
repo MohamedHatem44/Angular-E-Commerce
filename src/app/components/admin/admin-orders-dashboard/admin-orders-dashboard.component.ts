@@ -2,6 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { OrderService } from 'src/app/services/order.service';
 import { UserService } from 'src/app/services/user.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../../dialogs/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-admin-orders-dashboard',
@@ -14,7 +16,7 @@ export class AdminOrdersDashboardComponent {
   showModal = false;
   users: any[] = [];
 
-  constructor(private orderService: OrderService, private authService: AuthenticationService, private userService: UserService) { }
+  constructor(private orderService: OrderService, private authService: AuthenticationService, private userService: UserService,public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.fetchOrders();
@@ -35,17 +37,23 @@ export class AdminOrdersDashboardComponent {
     })
   }
 
-  deleteOrder(orderId: string) {
-    this.orderService.deleteOrder(orderId).subscribe({
-      next: () => {
-        this.orders = this.orders.filter((order: { _id: string; }) => order._id !== orderId);
-      },
-      error: (err) => {
-        console.error("Error deleting order:", err);
-        // Handle error
+  deleteOrder(orderId: string): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        message: 'Are you sure you want to delete this order?',
+        proceed: () => {
+          this.orderService.deleteOrder(orderId).subscribe({
+            next: () => {
+              this.orders = this.orders.filter((order: { _id: string; }) => order._id !== orderId);
+              this.fetchOrders();
+            },
+            error: (err) => {
+              console.error(err);
+            }
+          });
+        }
       }
     });
-    this.fetchOrders();
   }
 
   changeOrderStatus(event: any, orderId: string) {

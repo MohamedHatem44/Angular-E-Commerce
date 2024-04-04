@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+// import { MatDialogModule } from '@angular/material/dialog';
+// import { MatButtonModule } from '@angular/material/button';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -26,7 +29,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SliderComponent } from './components/slider/slider.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+// import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AdminSidebarComponent } from './components/admin/admin-sidebar/admin-sidebar.component';
@@ -39,6 +42,12 @@ import { AdminUsersDashboardComponent } from './components/admin/admin-users-das
 import { AdminOrdersDashboardComponent } from './components/admin/admin-orders-dashboard/admin-orders-dashboard.component';
 import { AdminAddProductComponent } from './components/admin/admin-add-product/admin-add-product.component';
 import { AdminAddCategoryComponent } from './components/admin/admin-add-category/admin-add-category.component';
+import { AdminAddBrandComponent } from './components/admin/admin-add-brand/admin-add-brand.component';
+import { AdminProductDetailsComponent } from './components/admin/admin-product-details/admin-product-details.component';
+import { ConfirmationDialogComponent } from './components/dialogs/confirmation-dialog/confirmation-dialog.component';
+import { AlertDialogComponent } from './components/dialogs/alert-dialog/alert-dialog.component';
+
+
 
 
 @NgModule({
@@ -70,6 +79,10 @@ import { AdminAddCategoryComponent } from './components/admin/admin-add-category
     AdminOrdersDashboardComponent,
     AdminAddProductComponent,
     AdminAddCategoryComponent,
+    ConfirmationDialogComponent,
+    AdminAddBrandComponent,
+    AdminProductDetailsComponent,
+    AlertDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -79,7 +92,7 @@ import { AdminAddCategoryComponent } from './components/admin/admin-add-category
     HttpClientModule,
     NoopAnimationsModule,
     MatButtonModule,
-    MatDialogModule,
+    MatDialogModule
   ],
   providers: [
     UserService,

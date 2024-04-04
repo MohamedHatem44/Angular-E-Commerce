@@ -11,7 +11,7 @@ import { jwtDecode } from 'jwt-decode';
 export class AuthenticationService {
   baseUrl = 'http://localhost:8000/api/v1/auth';
   /*-----------------------------------------------------------------*/
-  constructor(private httpClient: HttpClient, private router: Router) {
+  constructor(private _HttpClient: HttpClient, private _Router: Router) {
     if (localStorage.getItem('userToken') !== null) {
       this.decodeUserData();
     }
@@ -30,15 +30,15 @@ export class AuthenticationService {
     localStorage.removeItem('role');
     localStorage.removeItem('currentid');
     this.userData.next(null);
-    this.router.navigate(['users/login']);
+    this._Router.navigate(['users/login']);
   }
   /*-----------------------------------------------------------------*/
   register(userData: object): Observable<any> {
-    return this.httpClient.post(`${this.baseUrl}/signup`, userData);
+    return this._HttpClient.post(`${this.baseUrl}/signup`, userData);
   }
   /*-----------------------------------------------------------------*/
   login(userData: object): Observable<any> {
-    return this.httpClient.post(`${this.baseUrl}/login`, userData);
+    return this._HttpClient.post(`${this.baseUrl}/login`, userData);
   }
   /*-----------------------------------------------------------------*/
   getToken() {
@@ -49,14 +49,14 @@ export class AuthenticationService {
     return !!this.getToken();
   }
   /*-----------------------------------------------------------------*/
-    getUserRole() {
-      return localStorage.getItem('role');
-    }
+  getUserRole() {
+    return localStorage.getItem('role');
+  }
   /*-----------------------------------------------------------------*/
   getUserId() {
     let encodedToken = JSON.stringify(localStorage.getItem('userToken'));
     let decodedToken: any = jwtDecode(encodedToken);
     return decodedToken.userId;
   }
-/*-----------------------------------------------------------------*/
+  /*-----------------------------------------------------------------*/
 }

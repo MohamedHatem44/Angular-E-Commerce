@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,7 +14,7 @@ export class AppComponent {
     const currentRoute = this.router.url;
 
     // Check if the current route is the login or register route
-    return currentRoute.includes('users/login') || currentRoute.includes('users/register') || currentRoute.includes('adminPanel');
+    return currentRoute.includes('users/login') || currentRoute.includes('users/register') || localStorage.getItem('role') === 'admin';
   }
   /*-----------------------------------------------------------------*/
 }

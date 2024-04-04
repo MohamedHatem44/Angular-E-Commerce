@@ -14,6 +14,8 @@ import { OrderComponent } from './components/order/order.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { AuthGuardService } from './guards/auth-guard.guard';
 import { AdminGuardService } from './guards/admin-guard.guard';
+import { CanDeactivatePage } from './guards/can-deactivate.guard';
+
 
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { AdminPanelComponent } from './components/admin/admin-panel/admin-panel.component';
@@ -25,6 +27,8 @@ import { AdminUsersDashboardComponent } from './components/admin/admin-users-das
 import { AdminOrdersDashboardComponent } from './components/admin/admin-orders-dashboard/admin-orders-dashboard.component';
 import { AdminAddProductComponent } from './components/admin/admin-add-product/admin-add-product.component';
 import { AdminAddCategoryComponent } from './components/admin/admin-add-category/admin-add-category.component';
+import { AdminAddBrandComponent } from './components/admin/admin-add-brand/admin-add-brand.component';
+import { AdminProductDetailsComponent } from './components/admin/admin-product-details/admin-product-details.component';
 /*---------------------------------------------------------------------------------------------------------*/
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -37,9 +41,14 @@ const routes: Routes = [
       { path: '', component: AdminDashboardComponent, pathMatch: 'full' },
       { path: 'productsDashboard', component: AdminProductsDashboardComponent },
       { path: 'addProduct', component: AdminAddProductComponent },
+      { path: 'editProduct/:id', component: AdminAddProductComponent },
+      { path: 'productDetails/:id', component: AdminProductDetailsComponent },
       { path: 'categoriesDashboard', component: AdminCategoriesDashboardComponent },
       { path: 'addCategory', component: AdminAddCategoryComponent },
+      { path: 'editCategory/:id', component: AdminAddCategoryComponent },
       { path: 'brandsDashboard', component: AdminBrandsDashboardComponent },
+      { path: 'addBrand', component: AdminAddBrandComponent },
+      { path: 'editBrand/:id', component: AdminAddBrandComponent },
       { path: 'usersDashboard', component: AdminUsersDashboardComponent },
       { path: 'ordersDashboard', component: AdminOrdersDashboardComponent },
     ],
@@ -51,7 +60,7 @@ const routes: Routes = [
   { path: 'userprofile/:id', component: UserProfileComponent, canActivate: [AuthGuardService] },
   { path: 'cart', component: CartComponent },
   { path: 'users/login', component: LoginComponent },
-  { path: 'users/register', component: RegisterComponent },
+  { path: 'users/register', component: RegisterComponent,canDeactivate: [CanDeactivatePage], },
   { path: 'productsDetails/:id', component: ProductsDetailsComponent },
   
   //Order

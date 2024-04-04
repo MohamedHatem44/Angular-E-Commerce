@@ -1,5 +1,5 @@
 <div class="container d-flex justify-content-center align-items-center mt-5">
-  <h1 class="text-main fw-bold">All Products</h1>
+  <h1 class="text-main fw-bold fs-2">All Products</h1>
 </div>
 <!---------------------------------------------------------------------------------------->
 <!-- Loading -->
@@ -9,12 +9,28 @@
   </div>
 </div>
 <!---------------------------------------------------------------------------------------->
+<div class="container">
+
+  <div class="row height d-flex justify-content-center align-items-center">
+
+    <div class="col-md-8">
+
+      <div class="search">
+        <i class="fa fa-search"></i>
+        <input type="text" class="form-control" (keyup)="onChange($event)" placeholder="Have a question? Ask Now">
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<!---------------------------------------------------------------------------------------->
 <div *ngIf="!isSpin" class="row p-5 m-5">
-  <div *ngFor="let product of products" class="col-xl-3 col-lg-4 col-md-6 cursor-pointer">
+  <div *ngFor="let product of searchProduct" class="col-xl-3 col-lg-4 col-md-6 cursor-pointer">
     <div class="product px-2 py-4">
       <a [routerLink]="['/productsDetails', product._id]">
         <img class="w-100" src="{{ product.image }}" />
-        <span class="text-main fw-bold font-sm">{{ product.category.name }}</span>
+
         <h3 class="h6 fw-bolder">
           {{ product.title.split(' ').splice(0, 2).join(' ') }}
         </h3>
@@ -28,7 +44,7 @@
         </div>
       </a>
 
-      <button *ngIf="getUserRole() !== 'admin'" (click)="addToCart(product._id)" class="btn btn-success w-50 my-2">
+      <button *ngIf="getUserRole() !== 'admin'" (click)="addToCart(product._id)" (click)="button.disabled = true" #button class="btn btn-success w-50 my-2">
         <i *ngIf="isLoading" class="fas fa-spinner fa-spin"></i>
         <span>+ Add</span>
       </button>

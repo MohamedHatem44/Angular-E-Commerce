@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   user: any;
-  constructor(private _AuthenticationService: AuthenticationService, private _Router: Router) {
+  constructor(private _AuthenticationService: AuthenticationService, private _Router: Router, private cartService: CartService) {
     // if (localStorage.getItem('userToken') !== null) {
     //   _Router.navigate(['/home']);
     // }
@@ -55,6 +57,9 @@ export class LoginComponent {
             this.apiError = 'An error occurred while logging in. Please try again later.';
           }
         },
+        complete: () => {
+          this.cartService.getUserCart();
+        }
       });
     } else {
       this.apiError = 'Please fill in all the required fields.';

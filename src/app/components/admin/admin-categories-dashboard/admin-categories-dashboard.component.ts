@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from 'src/app/models/category';
 import { CategoryService } from 'src/app/services/category.service';
+import { ConfirmationDialogComponent } from '../../dialogs/confirmation-dialog/confirmation-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 /*-----------------------------------------------------------------*/
 @Component({
   selector: 'app-admin-categories-dashboard',
@@ -10,35 +13,14 @@ import { CategoryService } from 'src/app/services/category.service';
 /*-----------------------------------------------------------------*/
 export class AdminCategoriesDashboardComponent implements OnInit {
   categories: Category[] = [];
-  newCategory: Category = { name: '', image: '' };
   specificCatrgory: Category = {};
   /*-----------------------------------------------------------------*/
   // Ctor
-  constructor(private _CategoryService: CategoryService) {}
+  constructor(private _CategoryService: CategoryService, private _Router: Router, private dialog: MatDialog) {}
   /*-----------------------------------------------------------------*/
   ngOnInit(): void {
     // Get list of Categories
-    this._CategoryService.getAllcategories().subscribe(
-      (response: any) => {
-        this.categories = response.data;
-      },
-      (error: any) => {
-        console.error('Error fetching categories:', error);
-      }
-    );
-  }
-  /*-----------------------------------------------------------------*/
-  // Create Category
-  createCategory(): void {
-    this._CategoryService.createCategory(this.newCategory).subscribe(
-      (response: any) => {
-        this.categories.push(response.data);
-        this.newCategory = { name: '' };
-      },
-      (error: any) => {
-        console.error('Error creating category:', error);
-      }
-    );
+    this._getcategories();
   }
   /*-----------------------------------------------------------------*/
   // Get specific Category by id
@@ -67,15 +49,51 @@ export class AdminCategoriesDashboardComponent implements OnInit {
   }
   /*-----------------------------------------------------------------*/
   // Delete specific Category
-  deleteCategory(categoryId: any): void {
-    this._CategoryService.deleteCategory(categoryId).subscribe(
-      () => {
-        this.categories = this.categories.filter((category: Category) => category._id !== categoryId);
+  _deleteCategory(categoryId: any): void {
+    this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        message: 'Are you sure you want to delete this category?',
+        proceed: () => {
+          this._CategoryService.deleteCategory(categoryId).subscribe({
+            next: () => {
+              // this.categories = this.categories.filter((category: Category) => category._id !== categoryId);
+              this._getcategories();
+            },
+            error: (error) => {
+              console.error('Error deleting category:', error);
+            },
+          });
+        },
+      },
+    });
+  }
+  /*-----------------------------------------------------------------*/
+  // Get list of Categories
+  private _getcategories() {
+    this._CategoryService.getAllcategories().subscribe(
+      (response: any) => {
+        this.categories = response.data;
       },
       (error: any) => {
-        console.error('Error deleting category:', error);
+        console.error('Error fetching categories:', error);
       }
     );
   }
+  /*-----------------------------------------------------------------*/
+  _editCategory(categoryId: any) {
+    this._Router.navigate([`/adminPanel/editCategory/${categoryId}`]);
+  }
 }
+/*-----------------------------------------------------------------*/
+// Delete specific Category
+// deleteCategory(categoryId: any): void {
+//   this._CategoryService.deleteCategory(categoryId).subscribe(
+//     () => {
+//       this.categories = this.categories.filter((category: Category) => category._id !== categoryId);
+//     },
+//     (error: any) => {
+//       console.error('Error deleting category:', error);
+//     }
+//   );
+// }
 /*-----------------------------------------------------------------*/

@@ -62,7 +62,7 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent, canActivate: [AuthGuardService] },
   { path: 'users/login', component: LoginComponent },
   { path: 'users/register', component: RegisterComponent, canDeactivate: [CanDeactivatePage] },
-  { path: 'productsDetails/:id', component: ProductsDetailsComponent },
+  { path: 'productsDetails/:id', component: ProductsDetailsComponent, canActivate: [AuthGuardService] },
 
   //Order
   { path: 'Orders', component: OrderComponent, canActivate: [AuthGuardService] },

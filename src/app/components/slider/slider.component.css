@@ -1,35 +1,35 @@
 .carousel-paragraph {
   color: rgb(239, 67, 204);
 }
-/* #carouselExampleCaptions{
-  position: relative;
-} */
+
 /*  small screens */
 @media (max-width: 575px) {
   .carousel-caption h1 {
-    font-size: 1rem; /* Adjust as needed */
+    font-size: 1rem;
   }
   .carousel-caption p {
-    font-size: 0.5rem; /* Adjust as needed */
+    font-size: 0.5rem;
   }
 }
 /* medium screens */
 @media (min-width: 576px) and (max-width: 767px) {
   .carousel-caption h1 {
-    font-size: 2rem; /* Adjust as needed */
+    font-size: 2rem;
   }
   .carousel-caption p {
-    font-size: 1rem; /* Adjust as needed */
+    font-size: 1rem;
   }
 }
 
 /*  large screens */
 @media (min-width: 768px) {
   .carousel-caption h1 {
-    font-size: 4rem; /* Adjust as needed */
+    font-size: 4rem;
+    line-height: 1;
   }
   .carousel-caption p {
-    font-size: 1.2rem; /* Adjust as needed */
+    font-size: 1.2rem;
+    line-height: 1.5;
   }
 }
 

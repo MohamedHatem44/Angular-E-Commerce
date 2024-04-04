@@ -19,7 +19,7 @@ export class UserService {
   }
   /*-----------------------------------------------------------------*/
   // Get specific User by id
-  getUserById(userId: number): Observable<any> {
+  getUserById(userId: string): Observable<any> {
     return this.httpClient.get(`${this.baseUrl}/${userId}`);
   }
   /*-----------------------------------------------------------------*/
@@ -29,8 +29,8 @@ export class UserService {
   }
   /*-----------------------------------------------------------------*/
   // Update specific User
-  updateUser(userId: number, user: any): Observable<any> {
-    return this.httpClient.patch(`${this.baseUrl}/${userId}`, user);
+  updateUser(userId: string, user: FormData): Observable<any> {
+    return this.httpClient.put(`${this.baseUrl}/${userId}`, user);
   }
   /*-----------------------------------------------------------------*/
   // Delete specific User

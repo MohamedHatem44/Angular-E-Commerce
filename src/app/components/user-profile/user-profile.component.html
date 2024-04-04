@@ -2,85 +2,50 @@
   <hr class="mt-0 mb-4" />
   <div class="row">
     <div class="col-xl-4">
-
       <div class="card mb-4 mb-xl-0">
-        <div class="card-header">Profile Picture</div>
+        <div class="card-header d-flex justify-content-center">Profile Picture</div>
         <div class="card-body text-center">
-
-
-          <div *ngIf="currentuser?.image">
-            <img
-             [src]=" currentuser?.image || 'http://bootdey.com/img/Content/avatar/avatar1.png'"
-              alt="Profile Picture"
-              class="rounded-circle img-fluid my-3"
-               style="width: 150px">
+          <div>
+            <img [src]="currentuser?.image || '../../../assets/images/user.png'" alt="Profile Picture" class="rounded-circle img-fluid my-3" style="width: 150px" />
           </div>
-
-          <div class="form-group">
-            <input
-              class="account-file-input my-3"
-              type="file"
-              id="imgInput"
-              name="imgInput"
-              (change)="onFileChange($event)"
-            >
-          </div>
-
         </div>
       </div>
     </div>
-
+    <!----------------------------------------------------------------------------------------------->
     <div class="col-lg-8">
       <div class="card mb-4">
         <div class="card-body">
-          <form #myForm="ngForm" (ngSubmit)="updateUserProfile()">
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">User Name</p>
-              </div>
-              <div class="col-sm-9">
-                <input
-                  type="text"
-                  id="nameInput"
-                  name="nameInput"
-                  [value]="currentuser?.name"
-                >
-              </div>
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="my-2 fs-6">User Name :</p>
             </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">Email</p>
-              </div>
-              <div class="col-sm-9">
-                <input
-                  type="email"
-                  id="emailInput"
-                  name="emailInput"
-                  [value]="currentuser?.email"
-                  disabled
-                >
-              </div>
+            <div class="col-sm-9">
+              <p class="my-2 fs-6">{{ currentuser?.name }}</p>
             </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">Phone Number</p>
-              </div>
-              <div class="col-sm-9">
-                <input
-                  type="tel"  id="phoneInput"
-                  name="phonenumber"
-                  [value]="currentuser?.phone"
-                  required
-                >
-              </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="my-2 fs-6">Email :</p>
             </div>
-              <br>
-              <button type="submit" class="btn btn-primary" [disabled]="isSaving">Save Changes</button>
-            </form>
+            <div class="col-sm-9">
+              <p class="my-2 fs-6">{{ currentuser?.email }}</p>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-sm-3 fs-6">
+              <p class="my-2">Phone Number :</p>
+            </div>
+            <div class="col-sm-9 fs-6">
+              <p class="my-2">{{ currentuser?.phone || 0 }}</p>
+            </div>
+          </div>
+          <br />
+          <button type="button" class="btn btn-primary w-25" [routerLink]="['/usereditprofile', currentId]">Edit Profile</button>
         </div>
       </div>
     </div>
   </div>
 </div>
+<!----------------------------------------------------------------------------------------------->

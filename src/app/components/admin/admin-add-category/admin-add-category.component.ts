@@ -110,7 +110,6 @@ export class AdminAddCategoryComponent implements OnInit {
         });
       },
       (error: any) => {
-        alert('An error occurred while Updated the category. Please try again.');
         this.openAlertDialog('Error', 'An error occurred while updating the category. Please try again.');
 
         this.backendErrors = true;

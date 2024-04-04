@@ -14,7 +14,6 @@ import { AuthGuardService } from './guards/auth-guard.guard';
 import { AdminGuardService } from './guards/admin-guard.guard';
 import { CanDeactivatePage } from './guards/can-deactivate.guard';
 
-
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { AdminPanelComponent } from './components/admin/admin-panel/admin-panel.component';
 import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard.component';
@@ -27,6 +26,7 @@ import { AdminAddProductComponent } from './components/admin/admin-add-product/a
 import { AdminAddCategoryComponent } from './components/admin/admin-add-category/admin-add-category.component';
 import { AdminAddBrandComponent } from './components/admin/admin-add-brand/admin-add-brand.component';
 import { AdminProductDetailsComponent } from './components/admin/admin-product-details/admin-product-details.component';
+import { UserEditProfileComponent } from './components/user-edit-profile/user-edit-profile.component';
 /*---------------------------------------------------------------------------------------------------------*/
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -38,7 +38,7 @@ const routes: Routes = [
     children: [
       { path: '', component: AdminDashboardComponent, pathMatch: 'full' },
       { path: 'productsDashboard', component: AdminProductsDashboardComponent },
-      { path: 'addProduct', component: AdminAddProductComponent ,canDeactivate: [CanDeactivatePage],},
+      { path: 'addProduct', component: AdminAddProductComponent, canDeactivate: [CanDeactivatePage] },
       { path: 'editProduct/:id', component: AdminAddProductComponent },
       { path: 'productDetails/:id', component: AdminProductDetailsComponent },
       { path: 'categoriesDashboard', component: AdminCategoriesDashboardComponent },
@@ -56,9 +56,10 @@ const routes: Routes = [
   { path: 'brands', component: BrandsComponent },
   { path: 'cart', component: CartComponent, canActivate: [AuthGuardService] },
   { path: 'userprofile/:id', component: UserProfileComponent, canActivate: [AuthGuardService] },
-  { path: 'cart', component: CartComponent ,canActivate: [AuthGuardService]},
+  { path: 'usereditprofile/:id', component: UserEditProfileComponent, canActivate: [AuthGuardService] },
+  { path: 'cart', component: CartComponent, canActivate: [AuthGuardService] },
   { path: 'users/login', component: LoginComponent },
-  { path: 'users/register', component: RegisterComponent,canDeactivate: [CanDeactivatePage], },
+  { path: 'users/register', component: RegisterComponent, canDeactivate: [CanDeactivatePage] },
   { path: 'productsDetails/:id', component: ProductsDetailsComponent },
   { path: '**', component: NotFoundComponent },
 ];

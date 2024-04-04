@@ -38,6 +38,7 @@ import { AdminAddBrandComponent } from './components/admin/admin-add-brand/admin
 import { AdminProductDetailsComponent } from './components/admin/admin-product-details/admin-product-details.component';
 import { ConfirmationDialogComponent } from './components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { AlertDialogComponent } from './components/dialogs/alert-dialog/alert-dialog.component';
+import { UserEditProfileComponent } from './components/user-edit-profile/user-edit-profile.component';
 
 
 @NgModule({
@@ -70,6 +71,7 @@ import { AlertDialogComponent } from './components/dialogs/alert-dialog/alert-di
     AdminAddBrandComponent,
     AdminProductDetailsComponent,
     AlertDialogComponent,
+    UserEditProfileComponent,
   ],
   imports: [BrowserModule, FormsModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule, MatButtonModule, MatDialogModule],
   providers: [

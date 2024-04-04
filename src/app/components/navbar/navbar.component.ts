@@ -16,13 +16,19 @@ export class NavbarComponent implements OnInit {
   isAdmin: boolean = false;
   isUser: boolean = false;
   cartNumber: number = 0;
-  currentId: any = '';
+  currentId: any;
   isLoading: boolean = false;
   user: any;
 
   /*-----------------------------------------------------------------*/
-  cartLength:any;
-  constructor(private httpClient:HttpClient,private _AuthenticationService: AuthenticationService,private cartService:CartService, private _UserService: UserService, private router: Router) {
+  cartLength: any;
+  constructor(
+    private httpClient: HttpClient,
+    private _AuthenticationService: AuthenticationService,
+    private cartService: CartService,
+    private _UserService: UserService,
+    private router: Router
+  ) {
     this.cartService.getUserCart();
     this.cartService.cartLength.subscribe({
       next: (value) => {

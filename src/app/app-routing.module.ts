@@ -63,10 +63,10 @@ const routes: Routes = [
   { path: 'users/login', component: LoginComponent },
   { path: 'users/register', component: RegisterComponent, canDeactivate: [CanDeactivatePage] },
   { path: 'productsDetails/:id', component: ProductsDetailsComponent },
-  
+
   //Order
-  { path: 'Orders', component: OrderComponent },
-  { path: 'payment', component: PaymentComponent },
+  { path: 'Orders', component: OrderComponent, canActivate: [AuthGuardService] },
+  { path: 'payment', component: PaymentComponent, canActivate: [AuthGuardService] },
   // { path: '', redirectTo: '/orders', pathMatch: 'full' },
   { path: '**', component: NotFoundComponent },
 ];

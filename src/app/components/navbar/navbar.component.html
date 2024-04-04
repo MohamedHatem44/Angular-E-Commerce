@@ -33,14 +33,10 @@
             >Brands</a
           >
         </li>
-        <li class="nav-item">
-          <a
-            class="nav-link fw-normal"
-            aria-current="page"
-            routerLink="/Orders"
-            routerLinkActive="fw-bold text-primary"
-            [routerLinkActiveOptions]="{ exact: true }"
-            >Orders</a>
+        <li class="nav-item" *ngIf="isLogin && isUser">
+          <a class="nav-link fw-normal" aria-current="page" routerLink="/Orders" routerLinkActive="fw-bold text-primary" [routerLinkActiveOptions]="{ exact: true }"
+            >Orders</a
+          >
         </li>
         <li class="nav-item" *ngIf="isLogin && isUser">
           <a

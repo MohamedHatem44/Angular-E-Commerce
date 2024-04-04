@@ -16,7 +16,6 @@
           <td>{{ order.status }}</td>
           <td>{{ order.date | date: 'yyyy-MM-dd' }}</td>
           <td>
-            <button class="btn btn-primary mr-2" (click)="viewOrderDetails(order)">View Details</button>
             <button class="btn btn-danger mr-2" (click)="deleteOrder(order._id)">Delete</button>
             <select class="form-select" (change)="changeOrderStatus($event, order._id)">
               <option value="placed">Placed</option>

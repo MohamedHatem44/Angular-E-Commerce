@@ -96,7 +96,26 @@ deleteUserCart(){
 //========================================================================
 navigateToPaymentPage(): void {
   // Navigate to the payment page route
-  this.router.navigate(['/payment']);
+
+  let prices = this.carts.map((cart:any) => {
+    return cart.product.price * cart.quantity;
+});
+
+let totalPrice = prices.reduce((pre:any, acc:any) => {
+  return pre + acc;
+})
+
+let data = {
+  carts: this.carts,
+  totalPrice
+}
+
+localStorage.setItem('cartsData', JSON.stringify(data));
+
+console.log(JSON.parse(localStorage.getItem('cartsData')!))
+// console.log(prices);
+// console.log(totalPrice);
+this.router.navigate(['/payment']);
 }
 }
 

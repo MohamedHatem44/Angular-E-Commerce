@@ -1,50 +1,3 @@
-// import { Injectable } from '@angular/core';
-// import { HttpClient, HttpHeaders } from '@angular/common/http';
-// import { Observable } from 'rxjs';
-// import { AuthenticationService } from './authentication.service';
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class OrderService {
-//   private apiUrl = 'http://localhost:8000/api/v1/orders';
-
-//   constructor(private http: HttpClient, private authService: AuthenticationService) { }
-
-//   getAllOrders(): Observable<any> {
-//     const userId = this.authService.getUserId();
-//     const authToken = this.authService.getToken();
-    
-//     const headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
-//     return this.http.get(`${this.apiUrl}?userId=${userId}`, { headers });
-//   }
-
-//   // createOrder(orderData: any): Observable<any> {
-//   //   return this.http.post<any>(this.apiUrl, orderData);
-//   // }
-
-//   createOrder(orderData: any) {
-//     const url = this.apiUrl;
-//     const modelOrderData = {
-//       user: orderData.userId,
-//       products: orderData.cartItems.map((item: { productId: any; quantity: any; }) => ({
-//         product: item.productId,
-//         quantity: item.quantity
-//       })),
-//       totalPrice: orderData.totalPrice,
-//       status: 'placed' 
-//     };
-
-//     return this.http.post(url, modelOrderData);
-//   }
-
-//   deleteOrder(orderId: string): Observable<any> {
-//     const url = `${this.apiUrl}/${orderId}`;
-//     return this.http.delete<any>(url);
-//   }  
-
-// }
-
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
@@ -76,21 +29,31 @@ export class OrderService {
     return this.http.get(`${this.apiUrl}/user/${userId}`, { headers });
   }
 
-  createOrder(orderData: any): Observable<any> {
+  createOrderFromLocalStorage(userId: string): Observable<any> {
+    const cartData = JSON.parse(localStorage.getItem('cartsData') || '{}');
+
     const modelOrderData = {
-      user: orderData.userId,
-      products: orderData.cartItems.map((item: { productId: any; quantity: any; }) => ({
-        product: item.productId,
-        quantity: item.quantity
+      user: userId,
+      products: cartData.carts.map((cart: any) => ({
+        product: cart.product._id,
+        quantity: cart.quantity,
       })),
-      totalPrice: orderData.totalPrice,
-      status: 'placed' 
+      totalPrice: cartData.totalPrice,
+      status: 'placed',
     };
 
     return this.http.post(this.apiUrl, modelOrderData).pipe(
-      catchError(this.handleError)
+      catchError((error) => {
+        console.error("Error creating order:", error);
+        return throwError(error);
+      })
     );
   }
+
+  // private handleError(error: any) {
+  //   console.error('An error occurred:', error);
+  //   throw error; // You can handle the error as per your application's requirements
+  // }
 
   deleteOrder(orderId: string): Observable<any> {
     const url = `${this.apiUrl}/${orderId}`;

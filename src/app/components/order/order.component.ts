@@ -113,24 +113,21 @@ export class OrderComponent implements OnInit {
   }
 
   createOrder() {
-    // Prepare order data (userId, cartItems, totalPrice)
     const orderData = {
       userId: this.authService.getUserId(),
       cartItems: this.cartItems,
       totalPrice: this.totalPrice,
     };
-
-    this.orderService.createOrder(orderData)
+    const userId = this.authService.getUserId();
+    this.orderService.createOrderFromLocalStorage(userId)
       .subscribe({
         next: (response) => {
           console.log("Order created successfully:", response);
-          // Clear cart (optional)
-          this.cartItems = [];
+          localStorage.removeItem('cartsData');
         },
         error: (err) => {
           console.error("Error creating order:", err);
         }
       });
   }
-
 }

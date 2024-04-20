@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { OrderService } from 'src/app/services/order.service';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-payment',
@@ -11,7 +13,7 @@ import { Router } from '@angular/router';
 export class PaymentComponent implements OnInit {
   paymentForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(private fb: FormBuilder, private router: Router, private orderService: OrderService, private cartService: CartService) {}
 
   ngOnInit(): void {
     this.createPaymentForm();
@@ -28,12 +30,42 @@ export class PaymentComponent implements OnInit {
 
   processPayment(event: Event): void {
     event.preventDefault();
-        if (this.paymentForm.valid) {
+  
+    if (this.paymentForm.valid) {
+      // Payment is successful
       alert('Payment processed successfully!');
-      this.router.navigate(['/Orders']);
+  
+      const userId = localStorage.getItem('currentid') || '';
+      const cartData = JSON.parse(localStorage.getItem('cartsData') || '{}');
+      this.orderService.createOrderFromLocalStorage(userId).subscribe({
+        next: (response) => {
+          console.log("Order created successfully:", response);
+          if (Array.isArray(cartData.carts)) {
+            cartData.carts.forEach((cart: any) => {
+              const cartId = cart._id;
+              this.cartService.deleteUserCart(cartId).subscribe({
+                next: (response) => {
+                  console.log(`Cart with ID ${cartId} deleted successfully.`);
+                },
+                error: (err) => {
+                  console.error(`Error deleting cart with ID ${cartId}:`, err);
+                },
+              });
+            });
+          }
+            // localStorage.removeItem('cartsData');
+            this.router.navigate(['/Orders']);
+        },
+        error: (err) => {
+          console.error("Error creating order:", err);
+          alert("There was an error creating the order.");
+        },
+      });
+  
     } else {
       alert('Please check the entered payment details.');
     }
   }
+  
   
 }
